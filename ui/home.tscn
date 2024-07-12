@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cm47frugkr00w"]
+[gd_scene load_steps=4 format=3 uid="uid://cm47frugkr00w"]
 
-[ext_resource type="Texture2D" uid="uid://c65e4mjr075ue" path="res://assets/71-unintended-consequences.png" id="1_c60lq"]
-[ext_resource type="Texture2D" uid="uid://5e5ot74hk7lb" path="res://assets/71-All-Cards.png" id="2_01alt"]
+[ext_resource type="Script" path="res://ui/home.gd" id="1_wptgs"]
+[ext_resource type="Texture2D" uid="uid://c65e4mjr075ue" path="res://assets/71-unintended-consequences.png" id="2_ux171"]
+[ext_resource type="Texture2D" uid="uid://5e5ot74hk7lb" path="res://assets/71-All-Cards.png" id="3_8ltp5"]
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -10,28 +11,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wptgs")
 
-[node name="Theme" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 948.0
-offset_right = 422.0
-offset_bottom = 1064.0
-texture = ExtResource("1_c60lq")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Wildcards" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 1447.0
-offset_top = 864.0
-offset_right = 1896.0
-offset_bottom = 1064.0
-texture = ExtResource("2_01alt")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -82,6 +64,26 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
+[node name="Theme" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 948.0
+offset_right = 422.0
+offset_bottom = 1064.0
+texture = ExtResource("2_ux171")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Wildcards" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1447.0
+offset_top = 864.0
+offset_right = 1896.0
+offset_bottom = 1064.0
+texture = ExtResource("3_8ltp5")
+expand_mode = 3
+stretch_mode = 5
+
 [node name="LoadingScreen" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -101,3 +103,8 @@ offset_right = 168.0
 offset_bottom = 948.0
 theme_override_font_sizes/font_size = 40
 text = "Loading..."
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
