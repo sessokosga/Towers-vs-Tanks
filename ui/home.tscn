@@ -13,7 +13,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wptgs")
 
-[node name="Title" type="Label" parent="."]
+[node name="Home" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Home"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -24,7 +33,7 @@ text = "Towers vs Tanks"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Home"]
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -33,38 +42,38 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -229.5
-offset_top = -120.0
+offset_top = -162.5
 offset_right = 229.5
-offset_bottom = 120.0
+offset_bottom = 162.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Play" type="Button" parent="Home/VBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Play"
 
-[node name="Upgrade" type="Button" parent="VBoxContainer"]
+[node name="Upgrade" type="Button" parent="Home/VBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Upgrade"
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
+[node name="Credits" type="Button" parent="Home/VBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Credits"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="Home/VBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
-[node name="Theme" type="TextureRect" parent="."]
+[node name="Theme" type="TextureRect" parent="Home"]
 layout_mode = 0
 offset_left = 15.0
 offset_top = 948.0
@@ -74,7 +83,7 @@ texture = ExtResource("2_ux171")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Wildcards" type="TextureRect" parent="."]
+[node name="Wildcards" type="TextureRect" parent="Home"]
 layout_mode = 0
 offset_left = 1447.0
 offset_top = 864.0
@@ -84,27 +93,7 @@ texture = ExtResource("3_8ltp5")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="LoadingScreen" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="LoadingScreen"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.162066, 0.162066, 0.162066, 1)
-
-[node name="Label" type="Label" parent="LoadingScreen"]
-offset_left = 106.0
-offset_top = 925.0
-offset_right = 168.0
-offset_bottom = 948.0
-theme_override_font_sizes/font_size = 40
-text = "Loading..."
-
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Home/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Home/VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Home/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Home/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://l8ghffm4ffln"]
+
+[ext_resource type="Script" path="res://autoloads/top_ui.gd" id="1_v56d1"]
+
+[node name="TopUI" type="CanvasLayer"]
+script = ExtResource("1_v56d1")
+
+[node name="LoadingScreen" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LoadingScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="Label" type="Label" parent="LoadingScreen"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 925.0
+offset_right = 292.0
+offset_bottom = 980.0
+theme_override_font_sizes/font_size = 40
+text = "Loading..."
+
+[node name="BackBtn" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 38.0
+offset_top = 35.0
+offset_right = 191.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 30
+text = "← Back"
