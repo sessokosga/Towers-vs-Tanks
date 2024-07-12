@@ -1,0 +1,62 @@
+on:
+  release:
+    types:
+      - created
+      - edited
+jobs:
+  release_windows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download windows
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          file: towers-vs-tanks-windows.zip
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      
+      - name: release windows
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: windows
+          ITCH_GAME: towers-vs-tanks
+          ITCH_USER: sessokosga
+          PACKAGE: towers-vs-tanks-windows.zip
+
+  release_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download linux
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          file: towers-vs-tanks-linux.zip
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      
+      - name: release linux
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: linux
+          ITCH_GAME: towers-vs-tanks
+          ITCH_USER: sessokosga
+          PACKAGE: towers-vs-tanks-linux.zip
+
+  release_web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download web
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          file: towers-vs-tanks-web.zip
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      
+      - name: release web
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: web
+          ITCH_GAME: towers-vs-tanks
+          ITCH_USER: sessokosga
+          PACKAGE: towers-vs-tanks-web.zip

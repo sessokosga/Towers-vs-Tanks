@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm47frugkr00w"]
+
+[ext_resource type="Texture2D" uid="uid://c65e4mjr075ue" path="res://assets/71-unintended-consequences.png" id="1_c60lq"]
+[ext_resource type="Texture2D" uid="uid://5e5ot74hk7lb" path="res://assets/71-All-Cards.png" id="2_01alt"]
+
+[node name="Home" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Theme" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 948.0
+offset_right = 422.0
+offset_bottom = 1064.0
+texture = ExtResource("1_c60lq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Wildcards" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1447.0
+offset_top = 864.0
+offset_right = 1896.0
+offset_bottom = 1064.0
+texture = ExtResource("2_01alt")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 165.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 120
+text = "Towers vs Tanks"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -120.0
+offset_right = 44.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Play2" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Play3" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Play"
