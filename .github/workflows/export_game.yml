@@ -35,6 +35,6 @@ jobs:
       with:
         token: ${{ secrets.EXPORT_GITHUB_TOKEN }}
         generateReleaseNotes: true
-        bodyFile: "./docs/latest.md"
+        bodyFile: "./docs/last.md"
         tag: ${{ github.ref_name }}
         artifacts: ${{ steps.export.outputs.archive_directory }}/*
