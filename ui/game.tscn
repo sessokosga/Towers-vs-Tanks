@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1y7606u08gmw"]
+
+[ext_resource type="Script" path="res://ui/game.gd" id="1_wlqq4"]
+[ext_resource type="PackedScene" uid="uid://wa250i8fjkfi" path="res://towers/tower.tscn" id="2_eh1pf"]
+[ext_resource type="PackedScene" uid="uid://bvbme60lhttgl" path="res://tanks/tank.tscn" id="3_ycn8v"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wlqq4")
+
+[node name="TowerSelection" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gameplay" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Tower" parent="Gameplay" instance=ExtResource("2_eh1pf")]
+position = Vector2(266, 786)
+
+[node name="Tank" parent="Gameplay" instance=ExtResource("3_ycn8v")]
+position = Vector2(398, 656)

@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://wa250i8fjkfi"]
+
+[ext_resource type="Script" path="res://towers/tower.gd" id="1_4sp23"]
+[ext_resource type="Texture2D" uid="uid://c53oovyvym8iw" path="res://towers/assets/images/towerDefense_tile181.png" id="2_css2w"]
+[ext_resource type="PackedScene" uid="uid://cl4qye8iw6huq" path="res://towers/projectiles/shot_thin.tscn" id="2_t41cw"]
+[ext_resource type="Texture2D" uid="uid://csc0l2hpxv0rw" path="res://towers/assets/images/towerDefense_tile249.png" id="3_5wfrw"]
+[ext_resource type="Texture2D" uid="uid://dwjxm03dvxsw0" path="res://towers/assets/images/explosion/explosionSmoke1.png" id="5_slgje"]
+[ext_resource type="Texture2D" uid="uid://bjpit7kb45wd8" path="res://towers/assets/images/explosion/explosionSmoke2.png" id="6_a5t7g"]
+[ext_resource type="Texture2D" uid="uid://gdhrbhypd8ec" path="res://towers/assets/images/explosion/explosionSmoke3.png" id="7_85q0b"]
+[ext_resource type="Texture2D" uid="uid://dg5auf5pdrl08" path="res://towers/assets/images/explosion/explosionSmoke4.png" id="8_d3mv8"]
+[ext_resource type="Texture2D" uid="uid://bkdlw0kqkvvs8" path="res://towers/assets/images/explosion/explosionSmoke5.png" id="9_fm180"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wsv0n"]
+resource_local_to_scene = true
+radius = 35.2278
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4q8b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_slgje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_a5t7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_85q0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d3mv8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fm180")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_inc78"]
+radius = 175.0
+
+[node name="Tower" type="Area2D" groups=["tower"]]
+script = ExtResource("1_4sp23")
+projectile_speed = 20.0
+projectile_scene = ExtResource("2_t41cw")
+
+[node name="Base" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_css2w")
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, 1)
+texture = ExtResource("3_5wfrw")
+offset = Vector2(-1, -25)
+
+[node name="Projectile" type="Sprite2D" parent="Body"]
+unique_name_in_owner = true
+position = Vector2(0, -115)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_wsv0n")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_o4q8b")
+frame = 4
+frame_progress = 1.0
+
+[node name="LabelSolidity" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -21.0
+offset_top = -13.0
+offset_right = 19.0
+offset_bottom = 15.0
+theme_override_colors/font_outline_color = Color(0, 0.254902, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Range" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_inc78")
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_sprite_animation_finished"]

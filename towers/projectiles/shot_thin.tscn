@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl4qye8iw6huq"]
+
+[ext_resource type="Script" path="res://common/projectile.gd" id="1_v66d7"]
+[ext_resource type="Texture2D" uid="uid://jtgirlo2vlkt" path="res://towers/assets/images/shotThin.png" id="2_yuj3y"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_00lvp"]
+radius = 5.0
+height = 40.0
+
+[node name="ShotThin" type="Area2D"]
+script = ExtResource("1_v66d7")
+from = 1
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_yuj3y")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_00lvp")

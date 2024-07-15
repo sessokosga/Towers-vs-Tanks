@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://balo5c7kqw7ej"]
+
+[ext_resource type="Script" path="res://autoloads/audio_player.gd" id="1_27gdh"]
+
+[node name="AudioPlayer" type="Node"]
+script = ExtResource("1_27gdh")
+music_enabled = true
