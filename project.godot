@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Towers vs Tanks"
-run/main_scene="res://ui/home.tscn"
+run/main_scene="res://ui/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://assets/GWJ-Full-Logo-tag-4k.png"
 config/icon="res://icon.svg"
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TopUI="*res://autoloads/top_ui.tscn"
+AudioPlayer="*res://autoloads/audio_player.tscn"
 
 [display]
 
@@ -27,6 +28,15 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
+
+[editor_plugins]
+
+enabled=PackedStringArray()
+
+[global_group]
+
+tank="Tanks"
+tower="Towers"
 
 [rendering]
 
