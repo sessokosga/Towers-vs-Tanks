@@ -41,6 +41,10 @@ layout_mode = 1
 unique_name_in_owner = true
 anchors_preset = 0
 
+[node name="TanksParent" type="Control" parent="Gameplay"]
+unique_name_in_owner = true
+anchors_preset = 0
+
 [node name="HUD" type="CanvasLayer" parent="Gameplay"]
 
 [node name="TowerButtons" type="HBoxContainer" parent="Gameplay/HUD"]

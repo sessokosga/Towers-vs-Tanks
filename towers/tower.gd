@@ -53,10 +53,12 @@ func shoot(direction : Vector2)->void:
 	projectile.speed = projectile_speed + 700
 	projectile.direction = direction
 	projectile_starting.add_child(projectile)
+	projectile_starting.remove_child(projectile)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Look for tanks
+	enemy = null
 	var rect = _range.get_child(0).shape.get_rect()
 	rect.position += global_position
 	for tank:Tank in get_tree().get_nodes_in_group("tank"):

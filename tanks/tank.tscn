@@ -44,6 +44,7 @@ script = ExtResource("1_srvxx")
 id = "red"
 projectile_scene = ExtResource("2_feapd")
 initial_barrel_rotation = -90.0
+initial_body_rotation = -90.0
 
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

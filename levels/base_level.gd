@@ -1,11 +1,12 @@
 class_name Level extends Control
 
-@onready var tower_places = $TowerPlaces
-@onready var tower_places_backup = $TowerPlacesBackup
-@onready var objects = $Objects
-@onready var objects_backup = $ObjectsBackup
-@onready var hovered = $Hovered
-@onready var hovered_backup = $HoveredBackup
+@onready var tower_places : TileMapLayer = $TowerPlaces
+@onready var tower_places_backup : TileMapLayer = $TowerPlacesBackup
+@onready var objects : TileMapLayer = $Objects
+@onready var objects_backup : TileMapLayer = $ObjectsBackup
+@onready var hovered : TileMapLayer = $Hovered
+@onready var hovered_backup : TileMapLayer = $HoveredBackup
+@onready var path : Control = $Paths
 
 @export var starting_places = 10
 @export var starting_objects = 10
@@ -75,4 +76,25 @@ func _process(delta: float) -> void:
 		var cell = tower_places.local_to_map(tower_places.get_local_mouse_position())
 		if tower_places.get_cell_atlas_coords(cell) != Vector2i(-1,-1):
 			hovered.set_cell(cell,hovered_backup.get_cell_source_id(cell),hovered_backup.get_cell_atlas_coords(cell))
+	
+func get_next_marker(pos:Vector2 = Vector2(-1,-1))->Vector2:
+	if pos == Vector2(-1,-1):
+		return path.get_child(0).global_position
+	
+	var paths_pos = path.get_children()
+	var i = 0
+	while i < paths_pos.size():
+		var mk:Marker2D = paths_pos[i]
+		if mk.global_position != pos:
+			i += 1
+		else:
+			break
+	
+	if i >= paths_pos.size()-1:
+		return Vector2(-1,-1)
+	else:
+		return paths_pos[i+1].global_position
+	
+	
+	
 	

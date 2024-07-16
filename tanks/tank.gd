@@ -3,6 +3,11 @@ class_name Tank extends CharacterBody2D
 enum CanonType {Mono, Double, Triple}
 enum Type {Base}
 
+signal arrived(tank)
+signal dead(tank)
+signal out_of_screen(tank)
+
+
 @export var id : String
 @export var speed = 300.0
 @export var solidity : float = 5
@@ -12,6 +17,7 @@ enum Type {Base}
 @export var projectile_speed : float = 4
 @export var projectile_scene : PackedScene 
 @export var initial_barrel_rotation : float = 0
+@export var initial_body_rotation : float = 0
 
 @onready var projectile_starting : Sprite2D = $"%Bullet"
 @onready var lab_solidity : Label = $"%LabelSolidity"
@@ -25,6 +31,8 @@ enum Type {Base}
 var direction : Vector2
 var shoot_timer = 0
 var enemy : Tower = null
+var target : Vector2
+var roation_speed:float = 3
 
 func _aim_at_enemy()->Vector2:
 	if is_instance_valid(enemy):
@@ -62,6 +70,29 @@ func _physics_process(delta: float) -> void:
 	if shoot_timer <= 0 and is_instance_valid(enemy):
 		shoot_timer = cooldown
 		_shoot(direction)
+		
+	# Move toward path
+	if global_position != target and target != Vector2(-1,-1):
+		direction = (target - body.global_position).normalized()
+		var angle_to = body.transform.x.angle_to(direction) + deg_to_rad(initial_body_rotation)
+		body.rotate(signf(angle_to) * 1 * min(delta * roation_speed, abs(angle_to)) )
+		
+		rect = hit_area.shape.get_rect()
+		rect.position += global_position
+		if rect.has_point(target):
+			global_position = target
+			arrived.emit(self)
+	
+		if direction.x:
+			velocity.x = direction.x * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
+		if direction.y:
+			velocity.y = direction.y * speed
+		else:
+			velocity.y = move_toward(velocity.y, 0, speed)
+		
+		position += velocity * delta
 		
 func explode()->void:
 	AudioPlayer.play_sfx(AudioPlayer.SFX.TankNormalExplosion)
