@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1y7606u08gmw"]
+[gd_scene load_steps=6 format=3 uid="uid://b1y7606u08gmw"]
 
 [ext_resource type="Script" path="res://ui/game.gd" id="1_wlqq4"]
+[ext_resource type="PackedScene" uid="uid://dtv1fsyvvbca7" path="res://ui/tower_button.tscn" id="3_6qfyv"]
+[ext_resource type="Texture2D" uid="uid://errnsxmnhuvi" path="res://ui/assets/images/towerDefense_tile249_hover.png" id="4_icn8f"]
+[ext_resource type="Texture2D" uid="uid://b3uplsa2k3apd" path="res://ui/assets/images/towerDefense_tile249_grayscale.png" id="4_r4ulb"]
 [ext_resource type="PackedScene" uid="uid://h05xap187a4v" path="res://levels/base_level.tscn" id="4_sffyr"]
 
 [node name="Game" type="Control"]
@@ -14,15 +17,45 @@ script = ExtResource("1_wlqq4")
 
 [node name="TowerSelection" type="Control" parent="."]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Gameplay" type="Control" parent="."]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BaseLEvel" parent="Gameplay" instance=ExtResource("4_sffyr")]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BaseLevel" parent="Gameplay" instance=ExtResource("4_sffyr")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="TowersParent" type="Control" parent="Gameplay"]
+unique_name_in_owner = true
+anchors_preset = 0
+
+[node name="HUD" type="CanvasLayer" parent="Gameplay"]
+
+[node name="TowerButtons" type="HBoxContainer" parent="Gameplay/HUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 110)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 120.0
+grow_horizontal = 2
+
+[node name="TowerButton" parent="Gameplay/HUD/TowerButtons" instance=ExtResource("3_6qfyv")]
+layout_mode = 2
+texture_hover = ExtResource("4_icn8f")
+texture_disabled = ExtResource("4_r4ulb")

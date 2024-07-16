@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_6goh0"]
 [ext_resource type="TileSet" uid="uid://cesbroxjsjdnp" path="res://levels/tileset.tres" id="1_aqkfs"]
 
-[node name="BaseLEvel" type="Control"]
+[node name="BaseLevel" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

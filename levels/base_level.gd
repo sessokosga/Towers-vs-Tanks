@@ -1,4 +1,4 @@
-extends Control
+class_name Level extends Control
 
 @onready var tower_places = $TowerPlaces
 @onready var tower_places_backup = $TowerPlacesBackup
@@ -14,6 +14,12 @@ const MAX_TRIALS = 40
 
 var used_objects : Array[Vector2i]
 var used_tower_places : Array[Vector2i]
+
+func hide_tower_places()->void:
+	tower_places.hide()
+	
+func show_tower_places()->void:
+	tower_places.show()
 
 func add_tower_places(needed)->bool:
 	var trials = 0
@@ -47,17 +53,26 @@ func add_objects(needed)->bool:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
+	hide_tower_places()
 	objects_backup.hide()
 	objects.clear()
 	tower_places_backup.hide()
 	tower_places.clear()
 	add_tower_places(starting_places)
 	add_objects(starting_objects)
+	
+func hovered_tower_place()->Vector2i:
+	var cell = hovered.local_to_map(hovered.get_local_mouse_position())
+	if hovered.get_cell_atlas_coords(cell) != Vector2i(-1,-1):
+		return cell
+	return Vector2i(-1,-1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Hower efect over tower places
 	hovered.clear()
-	var cell = tower_places.local_to_map(tower_places.get_local_mouse_position())
-	if tower_places.get_cell_atlas_coords(cell) != Vector2i(-1,-1):
-		hovered.set_cell(cell,hovered_backup.get_cell_source_id(cell),hovered_backup.get_cell_atlas_coords(cell))
+	if tower_places.visible:
+		var cell = tower_places.local_to_map(tower_places.get_local_mouse_position())
+		if tower_places.get_cell_atlas_coords(cell) != Vector2i(-1,-1):
+			hovered.set_cell(cell,hovered_backup.get_cell_source_id(cell),hovered_backup.get_cell_atlas_coords(cell))
+	
