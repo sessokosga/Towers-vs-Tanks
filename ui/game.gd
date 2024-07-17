@@ -10,19 +10,24 @@ extends Control
 var tower_node =  preload("res://towers/tower.tscn")
 var tank_node = preload("res://tanks/tank.tscn")
 
+var selected_tower_button :TowerButton = null
 var occupied_cells : Array[Vector2i]=[]
 var health = 20 : 
 	set(v):
 		health = v
 		lab_health.text = str("Health : ", health)
-var money = 0 : 
+		
+var money = 400 : 
 	set(v):
 		money = v
 		lab_money.text = str("Money : ", money)
+		_check_afordable_towers()
 
 
 var spanw_tank_timer = .8
 var timer = 0
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,9 +37,11 @@ func _ready() -> void:
 	
 func _on_tower_button_toggled(tb:TowerButton)->void:
 	if tb.button_pressed:
+		selected_tower_button = tb
 		level.show_tower_places()
 
 func _tower_button_unpress()->void:
+	selected_tower_button = null
 	for tb : TowerButton in tower_buttons.get_children():
 		tb.button_pressed = false
 		
@@ -42,7 +49,7 @@ func _on_tower_destroyed(tower:Tower)->void:
 	occupied_cells.remove_at(occupied_cells.find(tower.cell))
 		
 func _deploy_tower(cell:Vector2i)->void:
-	if occupied_cells.has(cell):
+	if occupied_cells.has(cell) or not is_instance_valid(selected_tower_button):
 		return
 	var tower = tower_node.instantiate()
 	tower.cell = cell
@@ -50,6 +57,7 @@ func _deploy_tower(cell:Vector2i)->void:
 	towers_parent.add_child(tower)
 	tower.dead.connect(_on_tower_destroyed)
 	occupied_cells.append(cell)
+	money -= selected_tower_button.cost
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -85,3 +93,8 @@ func _spawn_tank()->Tank:
 	tank.dead.connect(_on_tank_destroyed)
 	tank.target = level.get_next_marker(tank.global_position)
 	return tank
+	
+func _check_afordable_towers()->void:
+	for tb:TowerButton in tower_buttons.get_children():
+		tb.disabled = money < tb.cost
+			
