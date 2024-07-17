@@ -40,6 +40,7 @@ size = Vector2(58, 47)
 radius = 200.0
 
 [node name="Tank" type="CharacterBody2D" groups=["tank"]]
+position = Vector2(1, 0)
 script = ExtResource("1_srvxx")
 id = "red"
 projectile_scene = ExtResource("2_feapd")

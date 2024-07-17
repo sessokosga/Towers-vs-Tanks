@@ -4,11 +4,16 @@ extends Control
 @onready var level : Level = $"%BaseLevel"
 @onready var towers_parent : Control = $"%TowersParent"
 @onready var tanks_parent : Control = $"%TanksParent"
+@onready var lab_health : Label = $"%Health"
 
 var tower_node =  preload("res://towers/tower.tscn")
 var tank_node = preload("res://tanks/tank.tscn")
 
 var occupied_cells : Array[Vector2i]=[]
+var health = 20 : 
+	set(v):
+		health = v
+		lab_health.text = str("health : ", health)
 
 var spanw_tank_timer = .8
 var timer = 0
@@ -58,9 +63,10 @@ func _process(delta: float) -> void:
 		level.hide_tower_places()
 		
 func _on_tank_reached_target(tank:Tank)->void:
-	if tank.global_position != Vector2(-1,-1):
-		tank.target = level.get_next_marker(tank.global_position)
-	else:
+	tank.target = level.get_next_marker(tank.global_position)
+	if tank.target == Vector2(-1,-1):
+		health -= 1
+		print(health)
 		tank.queue_free()
 
 func _spawn_tank()->Tank:
