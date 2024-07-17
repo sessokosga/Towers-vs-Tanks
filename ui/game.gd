@@ -1,6 +1,6 @@
 extends Control
 
-enum State {Playing, Pause, GameOver, Victory}
+enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 
 @onready var tower_buttons :HBoxContainer = $"%TowerButtons"
 @onready var level : Level = $"%BaseLevel"
@@ -10,6 +10,7 @@ enum State {Playing, Pause, GameOver, Victory}
 @onready var lab_money : Label = $"%Money"
 @onready var lab_wave : Label = $"%Wave"
 @onready var screeen_gameover : Control = $"%GameOver"
+@onready var screeen_wave_completed : Control = $"%WaveCompleted"
 @onready var screeen_pause : Control = $"%Pause"
 @onready var screeen_victory : Control = $"%Victory"
 @onready var screeen_base : Control = $"%BaseScreen"
@@ -156,6 +157,7 @@ func _handle_state_changes()->void:
 	screeen_gameover.hide()
 	screeen_pause.hide()
 	screeen_victory.hide()
+	screeen_wave_completed.hide()
 	match current_state:
 		State.Playing:
 			_set_peace(false)
@@ -164,6 +166,10 @@ func _handle_state_changes()->void:
 			_set_frozen(true)
 			screeen_base.show()
 			screeen_pause.show()
+		State.WaveCompleted:
+			_set_frozen(true)
+			screeen_base.show()
+			screeen_wave_completed.show()
 		State.GameOver:
 			screeen_base.show()
 			screeen_gameover.show()
@@ -197,8 +203,8 @@ func check_wave_completion()->void:
 	if spawned_tanks >= level.TANKS_PER_WAVE[current_wave] \
 		and tanks_parent.get_child_count() <= 0:
 			if current_wave < level.max_waves -1:
-				current_wave += 1
-				_start_wave()
+				
+				current_state = State.WaveCompleted
 			else:
 				if health > 0:
 					current_state = State.Victory
@@ -206,3 +212,9 @@ func check_wave_completion()->void:
 
 func _on_tanks_parent_child_order_changed() -> void:
 	check_wave_completion()
+
+
+func _on_next_wave_pressed() -> void:
+	current_state = State.Playing
+	current_wave += 1
+	_start_wave()
