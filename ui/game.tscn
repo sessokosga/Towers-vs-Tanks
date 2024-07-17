@@ -72,3 +72,12 @@ offset_right = 502.0
 offset_bottom = 97.0
 theme_override_font_sizes/font_size = 30
 text = "Health : 20"
+
+[node name="Money" type="Label" parent="Gameplay/HUD"]
+unique_name_in_owner = true
+offset_left = 551.0
+offset_top = 43.0
+offset_right = 757.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 30
+text = "Money : 0"

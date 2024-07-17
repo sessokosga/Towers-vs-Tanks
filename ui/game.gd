@@ -5,6 +5,7 @@ extends Control
 @onready var towers_parent : Control = $"%TowersParent"
 @onready var tanks_parent : Control = $"%TanksParent"
 @onready var lab_health : Label = $"%Health"
+@onready var lab_money : Label = $"%Money"
 
 var tower_node =  preload("res://towers/tower.tscn")
 var tank_node = preload("res://tanks/tank.tscn")
@@ -13,7 +14,12 @@ var occupied_cells : Array[Vector2i]=[]
 var health = 20 : 
 	set(v):
 		health = v
-		lab_health.text = str("health : ", health)
+		lab_health.text = str("Health : ", health)
+var money = 0 : 
+	set(v):
+		money = v
+		lab_money.text = str("Money : ", money)
+
 
 var spanw_tank_timer = .8
 var timer = 0
@@ -68,10 +74,14 @@ func _on_tank_reached_target(tank:Tank)->void:
 		health -= 1
 		print(health)
 		tank.queue_free()
+		
+func _on_tank_destroyed(tank)->void:
+	money += 20
 
 func _spawn_tank()->Tank:
 	var tank:Tank = tank_node.instantiate()
 	tank.global_position = level.get_next_marker()
 	tank.arrived.connect(_on_tank_reached_target)
+	tank.dead.connect(_on_tank_destroyed)
 	tank.target = level.get_next_marker(tank.global_position)
 	return tank
