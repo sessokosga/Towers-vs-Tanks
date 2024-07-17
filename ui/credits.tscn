@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhvwx47ug2y61"]
+[gd_scene load_steps=3 format=3 uid="uid://bhvwx47ug2y61"]
 
 [ext_resource type="Script" path="res://ui/credits.gd" id="1_ky25r"]
+[ext_resource type="PackedScene" uid="uid://ditxkthm5x152" path="res://ui/background.tscn" id="2_7mb30"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -11,12 +12,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ky25r")
 
+[node name="Background" parent="." instance=ExtResource("2_7mb30")]
+layout_mode = 1
+
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
+offset_left = 269.0
+offset_right = 509.0
 offset_bottom = 165.0
-grow_horizontal = 2
 theme_override_font_sizes/font_size = 70
 text = "Credits"
 horizontal_alignment = 1
@@ -29,10 +32,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -327.5
-offset_top = -86.5
-offset_right = 327.5
-offset_bottom = 86.5
+offset_left = -691.0
+offset_top = -134.0
+offset_right = -36.0
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 

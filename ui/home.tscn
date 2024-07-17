@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm47frugkr00w"]
+[gd_scene load_steps=5 format=3 uid="uid://cm47frugkr00w"]
 
 [ext_resource type="Script" path="res://ui/home.gd" id="1_wptgs"]
 [ext_resource type="Texture2D" uid="uid://c65e4mjr075ue" path="res://assets/71-unintended-consequences.png" id="2_ux171"]
+[ext_resource type="PackedScene" uid="uid://ditxkthm5x152" path="res://ui/background.tscn" id="2_xkcbt"]
 [ext_resource type="Texture2D" uid="uid://5e5ot74hk7lb" path="res://assets/71-All-Cards.png" id="3_8ltp5"]
 
 [node name="Home" type="Control"]
@@ -12,6 +13,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wptgs")
+
+[node name="Background" parent="." instance=ExtResource("2_xkcbt")]
+layout_mode = 1
 
 [node name="Home" type="Control" parent="."]
 unique_name_in_owner = true
@@ -27,7 +31,8 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 248.0
-offset_bottom = 165.0
+offset_top = 19.0
+offset_bottom = 184.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 120
 text = "Towers vs Tanks"
@@ -42,9 +47,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -691.0
-offset_top = -188.0
+offset_top = -126.0
 offset_right = -241.0
-offset_bottom = 137.0
+offset_bottom = 199.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
