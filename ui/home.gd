@@ -14,6 +14,9 @@ func _change_state(new_state : ScreenState)->void:
 	TopUI.hide_all()
 	home.hide()
 	match new_state:
+		ScreenState.Play:
+			TopUI.show_loading_screen()
+			get_tree().change_scene_to_file("res://ui/game.tscn")
 		ScreenState.Credits:
 			TopUI.show_loading_screen()
 			get_tree().change_scene_to_file("res://ui/credits.tscn")
@@ -31,7 +34,7 @@ func _process(delta: float) -> void:
 
 
 func _on_play_pressed() -> void:
-	pass # Replace with function body.
+	current_screen = ScreenState.Play
 
 
 func _on_upgrade_pressed() -> void:

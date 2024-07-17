@@ -22,7 +22,7 @@ var occupied_cells : Array[Vector2i]=[]
 var peace_mode = false
 var spawned_tanks = 0
 var wave_started = false
-var spanw_tank_timer_max = .8
+var spanw_tank_timer_max = 1.8
 var spanw_tank_timer = 0
 
 var current_wave : int:
@@ -55,6 +55,7 @@ var money :
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	TopUI.hide_loading_screen()
 	current_state = State.Playing
 	health = 20
 	money = 250
@@ -75,7 +76,9 @@ func _tower_button_unpress()->void:
 		tb.button_pressed = false
 		
 func _on_tower_destroyed(tower:Tower)->void:
-	occupied_cells.remove_at(occupied_cells.find(tower.cell))
+	var idx = occupied_cells.find(tower.cell)
+	if idx != -1:
+		occupied_cells.remove_at(idx)
 		
 func _deploy_tower(cell:Vector2i)->void:
 	if occupied_cells.has(cell) or not is_instance_valid(selected_tower_button):
@@ -192,9 +195,13 @@ func _start_wave():
 
 func check_wave_completion()->void:
 	if spawned_tanks >= level.TANKS_PER_WAVE[current_wave] \
-		and tanks_parent.get_child_count() <= 0 and current_wave < level.max_waves -1:
-			current_wave += 1
-			_start_wave()
+		and tanks_parent.get_child_count() <= 0:
+			if current_wave < level.max_waves -1:
+				current_wave += 1
+				_start_wave()
+			else:
+				if health > 0:
+					current_state = State.Victory
 
 
 func _on_tanks_parent_child_order_changed() -> void:

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://autoloads/top_ui.gd" id="1_v56d1"]
 
 [node name="TopUI" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_v56d1")
 
 [node name="LoadingScreen" type="Control" parent="."]

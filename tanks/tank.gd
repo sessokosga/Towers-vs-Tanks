@@ -29,7 +29,7 @@ signal out_of_screen(tank)
 
 
 var direction : Vector2
-var shoot_timer = 0
+var shoot_timer = 0.5
 var enemy : Tower = null
 var target : Vector2
 var roation_speed:float = 3
