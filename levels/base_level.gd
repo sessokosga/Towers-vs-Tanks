@@ -8,10 +8,12 @@ class_name Level extends Control
 @onready var hovered_backup : TileMapLayer = $HoveredBackup
 @onready var path : Control = $Paths
 
-@export var starting_places = 20#10
+@export var starting_places = 10
 @export var starting_objects = 10
+@export var max_waves = 5
 
 const MAX_TRIALS = 40
+const TANKS_PER_WAVE = [2,4,6,8,10]
 
 var used_objects : Array[Vector2i]
 var used_tower_places : Array[Vector2i]
@@ -94,7 +96,3 @@ func get_next_marker(pos:Vector2 = Vector2(-1,-1))->Vector2:
 		return Vector2(-1,-1)
 	else:
 		return paths_pos[i+1].global_position
-	
-	
-	
-	

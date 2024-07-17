@@ -63,6 +63,7 @@ grow_horizontal = 2
 layout_mode = 2
 texture_hover = ExtResource("4_icn8f")
 texture_disabled = ExtResource("4_r4ulb")
+cost = 75
 
 [node name="Health" type="Label" parent="Gameplay/HUD"]
 unique_name_in_owner = true
@@ -82,8 +83,18 @@ offset_bottom = 98.0
 theme_override_font_sizes/font_size = 30
 text = "Money : 400"
 
+[node name="Wave" type="Label" parent="Gameplay/HUD"]
+unique_name_in_owner = true
+offset_left = 1443.0
+offset_top = 43.0
+offset_right = 1649.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 30
+text = "Wave : 1"
+
 [node name="BaseScreen" type="Control" parent="Gameplay/HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,6 +176,7 @@ text = "Home
 
 [node name="Pause" type="Control" parent="Gameplay/HUD/BaseScreen"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,6 +308,7 @@ theme_override_font_sizes/font_size = 25
 text = "Home
 "
 
+[connection signal="child_order_changed" from="Gameplay/TanksParent" to="." method="_on_tanks_parent_child_order_changed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/Pause/HBoxContainer/Resume" to="." method="_on_resume_pressed"]
