@@ -81,3 +81,225 @@ offset_right = 757.0
 offset_bottom = 98.0
 theme_override_font_sizes/font_size = 30
 text = "Money : 400"
+
+[node name="BaseScreen" type="Control" parent="Gameplay/HUD"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Gameplay/HUD/BaseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.647059)
+
+[node name="GameOver" type="Control" parent="Gameplay/HUD/BaseScreen"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Gameplay/HUD/BaseScreen/GameOver"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 108.0
+offset_right = 190.0
+offset_bottom = 204.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/HUD/BaseScreen/GameOver"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -35.0
+offset_right = 350.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Restart" type="Button" parent="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Restart"
+
+[node name="NewRun" type="Button" parent="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "New Run
+"
+
+[node name="Home" type="Button" parent="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Home
+"
+
+[node name="Pause" type="Control" parent="Gameplay/HUD/BaseScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Gameplay/HUD/BaseScreen/Pause"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 108.0
+offset_right = 190.0
+offset_bottom = 204.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/HUD/BaseScreen/Pause"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -35.0
+offset_right = 350.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Resume" type="Button" parent="Gameplay/HUD/BaseScreen/Pause/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Resume
+"
+
+[node name="Restart" type="Button" parent="Gameplay/HUD/BaseScreen/Pause/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Restart"
+
+[node name="NewRun" type="Button" parent="Gameplay/HUD/BaseScreen/Pause/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "New Run
+"
+
+[node name="Home" type="Button" parent="Gameplay/HUD/BaseScreen/Pause/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Home
+"
+
+[node name="Victory" type="Control" parent="Gameplay/HUD/BaseScreen"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Gameplay/HUD/BaseScreen/Victory"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 108.0
+offset_right = 190.0
+offset_bottom = 204.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "Victory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/HUD/BaseScreen/Victory"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -35.0
+offset_right = 350.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Restart" type="Button" parent="Gameplay/HUD/BaseScreen/Victory/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Restart"
+
+[node name="NewRun2" type="Button" parent="Gameplay/HUD/BaseScreen/Victory/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "New Run
+"
+
+[node name="Home" type="Button" parent="Gameplay/HUD/BaseScreen/Victory/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Home
+"
+
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/Pause/HBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/Pause/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/Pause/HBoxContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/Victory/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/BaseScreen/Victory/HBoxContainer/Home" to="." method="_on_home_pressed"]

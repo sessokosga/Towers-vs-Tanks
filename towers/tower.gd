@@ -6,7 +6,6 @@ enum Type {Base}
 
 signal dead(tower)
 
-
 @export var damage : float = 4
 @export var title : String = "Tower"
 @export var type : Type = Type.Base
@@ -33,8 +32,10 @@ signal dead(tower)
 
 
 var shoot_timer = 0
+var peace_mode = false
 var enemy : Tank = null
 var cell : Vector2i
+var frozen = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,22 +66,26 @@ func shoot(direction : Vector2)->void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# Look for tanks
-	enemy = null
-	var rect = _range.get_child(0).shape.get_rect()
-	rect.position += global_position
-	for tank:Tank in get_tree().get_nodes_in_group("tank"):
-		if rect.has_point(tank.hit_area.global_position):
-			enemy = tank
-			break
-			
-	var direction = _aim_at_enemy()
-	
-	# Handle shoots
-	shoot_timer -= delta
-	if shoot_timer <= 0 and is_instance_valid(enemy):
-		shoot_timer = cooldown
-		shoot(direction)
+	if frozen:
+		return
+		
+	if not peace_mode:
+		# Look for tanks
+		enemy = null
+		var rect = _range.get_child(0).shape.get_rect()
+		rect.position += global_position
+		for tank:Tank in get_tree().get_nodes_in_group("tank"):
+			if rect.has_point(tank.hit_area.global_position):
+				enemy = tank
+				break
+				
+		var direction = _aim_at_enemy()
+		
+		# Handle shoots
+		shoot_timer -= delta
+		if shoot_timer <= 0 and is_instance_valid(enemy):
+			shoot_timer = cooldown
+			shoot(direction)
 		
 func explode()->void:
 	AudioPlayer.play_sfx(AudioPlayer.SFX.TowerNormalExplosion)

@@ -33,6 +33,8 @@ var shoot_timer = 0
 var enemy : Tower = null
 var target : Vector2
 var roation_speed:float = 3
+var peace_mode = false
+var frozen = false
 
 func _aim_at_enemy()->Vector2:
 	if is_instance_valid(enemy):
@@ -55,24 +57,25 @@ func _shoot(direction : Vector2)->void:
 	projectile.global_rotation = projectile_starting.global_rotation
 
 func _physics_process(delta: float) -> void:
-	global_position += speed * direction * delta
-	
-	# Look for towers
-	enemy = null
-	var rect = _range.get_child(0).shape.get_rect()
-	rect.position += global_position
-	for tower:Tower in get_tree().get_nodes_in_group("tower"):
-		if rect.has_point(tower.hit_area.global_position):
-			enemy = tower
-			break
-	
-	var direction = _aim_at_enemy()
-	
-	# Handle shoots
-	shoot_timer -= delta
-	if shoot_timer <= 0 and is_instance_valid(enemy):
-		shoot_timer = cooldown
-		_shoot(direction)
+	if frozen:
+		return
+	if not peace_mode:
+		# Look for towers
+		enemy = null
+		var rect = _range.get_child(0).shape.get_rect()
+		rect.position += global_position
+		for tower:Tower in get_tree().get_nodes_in_group("tower"):
+			if rect.has_point(tower.hit_area.global_position):
+				enemy = tower
+				break
+		
+		var direction = _aim_at_enemy()
+		
+		# Handle shoots
+		shoot_timer -= delta
+		if shoot_timer <= 0 and is_instance_valid(enemy):
+			shoot_timer = cooldown
+			_shoot(direction)
 		
 	# Move toward path
 	if global_position != target and target != Vector2(-1,-1):
@@ -80,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		var angle_to = body.transform.x.angle_to(direction) + deg_to_rad(initial_body_rotation)
 		body.rotate(signf(angle_to) * 1 * min(delta * roation_speed, abs(angle_to)) )
 		
-		rect = hit_area.shape.get_rect()
+		var rect = hit_area.shape.get_rect()
 		rect.position += global_position
 		if rect.has_point(target):
 			global_position = target
