@@ -37,7 +37,7 @@ animations = [{
 size = Vector2(58, 47)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do6v0"]
-radius = 175.0
+radius = 200.0
 
 [node name="Tank" type="CharacterBody2D" groups=["tank"]]
 script = ExtResource("1_srvxx")
@@ -89,7 +89,6 @@ shape = SubResource("RectangleShape2D_p8ft5")
 
 [node name="Range" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource("CircleShape2D_do6v0")

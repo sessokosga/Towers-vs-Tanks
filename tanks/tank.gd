@@ -50,12 +50,15 @@ func _shoot(direction : Vector2)->void:
 	var projectile : Projectile = projectile_scene.instantiate()
 	projectile.speed = projectile_speed + 700
 	projectile.direction = direction
-	projectile_starting.add_child(projectile)
+	add_child(projectile)
+	projectile.global_position = projectile_starting.global_position
+	projectile.global_rotation = projectile_starting.global_rotation
 
 func _physics_process(delta: float) -> void:
 	global_position += speed * direction * delta
 	
 	# Look for towers
+	enemy = null
 	var rect = _range.get_child(0).shape.get_rect()
 	rect.position += global_position
 	for tower:Tower in get_tree().get_nodes_in_group("tower"):
@@ -106,6 +109,7 @@ func take_damage(dmg:float)->void:
 	solidity -= dmg
 	lab_solidity.text = str(solidity)
 	if solidity <= 0:
+		dead.emit(self)
 		explode()
 
 func _on_animation_finished() -> void:

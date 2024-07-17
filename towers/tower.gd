@@ -4,6 +4,9 @@ enum CanonType {Mono, Double}
 enum UnlockConditions {None, }
 enum Type {Base}
 
+signal dead(tower)
+
+
 @export var damage : float = 4
 @export var title : String = "Tower"
 @export var type : Type = Type.Base
@@ -31,6 +34,7 @@ enum Type {Base}
 
 var shoot_timer = 0
 var enemy : Tank = null
+var cell : Vector2i
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,8 +56,12 @@ func shoot(direction : Vector2)->void:
 	var projectile : Projectile = projectile_scene.instantiate()
 	projectile.speed = projectile_speed + 700
 	projectile.direction = direction
+	projectile.global_rotation = projectile_starting.global_rotation
 	projectile_starting.add_child(projectile)
+	var pos = projectile.position
 	projectile_starting.remove_child(projectile)
+	add_child(projectile)
+	projectile.global_position = projectile_starting.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -91,4 +99,5 @@ func take_damage(dmg:float)->void:
 	solidity -= dmg
 	lab_solidity.text = str(solidity)
 	if solidity <= 0:
+		dead.emit(self)
 		explode()

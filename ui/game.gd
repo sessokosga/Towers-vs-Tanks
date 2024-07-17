@@ -19,8 +19,6 @@ func _ready() -> void:
 		tb.toggled_it.connect(_on_tower_button_toggled)
 	
 	
-	
-	
 func _on_tower_button_toggled(tb:TowerButton)->void:
 	if tb.button_pressed:
 		level.show_tower_places()
@@ -29,12 +27,17 @@ func _tower_button_unpress()->void:
 	for tb : TowerButton in tower_buttons.get_children():
 		tb.button_pressed = false
 		
+func _on_tower_destroyed(tower:Tower)->void:
+	occupied_cells.remove_at(occupied_cells.find(tower.cell))
+		
 func _deploy_tower(cell:Vector2i)->void:
 	if occupied_cells.has(cell):
 		return
 	var tower = tower_node.instantiate()
-	tower.global_position = (cell * 128) - Vector2i(25,30)
+	tower.cell = cell
+	tower.global_position = (cell * 128) + Vector2i(25,38)
 	towers_parent.add_child(tower)
+	tower.dead.connect(_on_tower_destroyed)
 	occupied_cells.append(cell)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

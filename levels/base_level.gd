@@ -8,7 +8,7 @@ class_name Level extends Control
 @onready var hovered_backup : TileMapLayer = $HoveredBackup
 @onready var path : Control = $Paths
 
-@export var starting_places = 10
+@export var starting_places = 20#10
 @export var starting_objects = 10
 
 const MAX_TRIALS = 40
