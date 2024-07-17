@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1y7606u08gmw"]
+[gd_scene load_steps=7 format=3 uid="uid://b1y7606u08gmw"]
 
 [ext_resource type="Script" path="res://ui/game.gd" id="1_wlqq4"]
 [ext_resource type="PackedScene" uid="uid://dtv1fsyvvbca7" path="res://ui/tower_button.tscn" id="3_6qfyv"]
 [ext_resource type="Texture2D" uid="uid://errnsxmnhuvi" path="res://ui/assets/images/towerDefense_tile249_hover.png" id="4_icn8f"]
 [ext_resource type="Texture2D" uid="uid://b3uplsa2k3apd" path="res://ui/assets/images/towerDefense_tile249_grayscale.png" id="4_r4ulb"]
 [ext_resource type="PackedScene" uid="uid://h05xap187a4v" path="res://levels/base_level.tscn" id="4_sffyr"]
+[ext_resource type="Texture2D" uid="uid://d3acn4h5yo831" path="res://ui/assets/images/pause.png" id="6_1vs0m"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -94,6 +95,7 @@ text = "Wave : 1"
 
 [node name="BaseScreen" type="Control" parent="Gameplay/HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -309,6 +311,7 @@ text = "Home
 
 [node name="WaveCompleted" type="Control" parent="Gameplay/HUD/BaseScreen"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -354,6 +357,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Next Wave"
 
+[node name="TextureButton" type="TextureButton" parent="Gameplay/HUD"]
+offset_left = 103.0
+offset_top = 32.0
+offset_right = 182.0
+offset_bottom = 94.0
+texture_normal = ExtResource("6_1vs0m")
+ignore_texture_size = true
+stretch_mode = 5
+
 [connection signal="child_order_changed" from="Gameplay/TanksParent" to="." method="_on_tanks_parent_child_order_changed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Home" to="." method="_on_home_pressed"]
@@ -363,3 +375,4 @@ text = "Next Wave"
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/Victory/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/Victory/HBoxContainer/Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/WaveCompleted/HBoxContainer/Next Wave" to="." method="_on_next_wave_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/TextureButton" to="." method="_on_texture_button_pressed"]

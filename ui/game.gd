@@ -118,6 +118,7 @@ func _on_tank_reached_target(tank:Tank)->void:
 	tank.target = level.get_next_marker(tank.global_position)
 	if tank.target == Vector2(-1,-1):
 		health -= 1
+		AudioPlayer.play_sfx(AudioPlayer.SFX.HealthReduced)
 		tank.queue_free()
 		check_wave_completion()
 		
@@ -151,6 +152,8 @@ func _set_frozen(enabled):
 		tower.frozen = enabled
 	
 func _handle_state_changes()->void:
+	if not is_instance_valid(screeen_base):
+		return
 	_set_peace(true)
 	_set_frozen(false)
 	screeen_base.hide()
@@ -167,6 +170,7 @@ func _handle_state_changes()->void:
 			screeen_base.show()
 			screeen_pause.show()
 		State.WaveCompleted:
+			AudioPlayer.play_ui(AudioPlayer.UI.Confirm)
 			_set_frozen(true)
 			screeen_base.show()
 			screeen_wave_completed.show()
@@ -174,23 +178,28 @@ func _handle_state_changes()->void:
 			screeen_base.show()
 			screeen_gameover.show()
 		State.Victory:
+			AudioPlayer.play_ui(AudioPlayer.UI.RewardUnlocked)
 			screeen_base.show()
 			screeen_victory.show()
 
 
 func _on_restart_pressed() -> void:
+	AudioPlayer.play_ui(AudioPlayer.UI.Select)
 	get_tree().reload_current_scene()
 
 
 func _on_home_pressed() -> void:
+	AudioPlayer.play_ui(AudioPlayer.UI.Select)
 	TopUI.show_loading_screen()
 	get_tree().change_scene_to_file("res://ui/home.tscn")
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
+		AudioPlayer.play_ui(AudioPlayer.UI.Select)
 		current_state = State.Pause
 
 func _on_resume_pressed() -> void:
+	AudioPlayer.play_ui(AudioPlayer.UI.Select)
 	current_state = State.Playing
 	
 func _start_wave():
@@ -218,3 +227,8 @@ func _on_next_wave_pressed() -> void:
 	current_state = State.Playing
 	current_wave += 1
 	_start_wave()
+
+
+func _on_texture_button_pressed() -> void:
+	AudioPlayer.play_ui(AudioPlayer.UI.Select)
+	current_state = State.Pause

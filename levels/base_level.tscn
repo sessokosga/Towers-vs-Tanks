@@ -70,4 +70,4 @@ position = Vector2(1018, 248)
 position = Vector2(1018, 955)
 
 [node name="Marker2D7" type="Marker2D" parent="Paths"]
-position = Vector2(2276, 955)
+position = Vector2(2022, 955)

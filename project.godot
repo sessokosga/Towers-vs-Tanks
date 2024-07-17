@@ -15,7 +15,7 @@ config/version="v0.01"
 run/main_scene="res://ui/home.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://assets/GWJ-Full-Logo-tag-4k.png"
-config/icon="res://icon.svg"
+config/icon="res://towers/assets/images/towerDefense_tile249.png"
 
 [autoload]
 

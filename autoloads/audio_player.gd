@@ -10,6 +10,7 @@ enum SFX{
 	TowerNormalExplosion,
 	TowerNormalShoot,
 	TowerMissilelShoot,
+	HealthReduced
 }
 
 enum UI {
@@ -47,6 +48,7 @@ const tank_shoot_big = preload("res://tanks/assets/audio/sfx/gun_silenced_sniper
 const tower_normal_explosion = preload("res://towers/assets/audio/sfx/DeepExplosion02.wav")
 const tower_normal_shoot = preload("res://towers/assets/audio/sfx/Assault Rifle - M4 - 03 - Burst 03.wav")
 const tower_missile_shoot = preload("res://towers/assets/audio/sfx/Cocking_11.wav")
+const  health_reduced = preload("res://towers/assets/audio/sfx/Explosive Hit 10 Filtered, Low End.wav")
 
 var volume_master : float = -24
 var volume_sfx : float = 0
@@ -106,6 +108,12 @@ func play_ui(id:UI,looping=false)->bool:
 func play_sfx(id:SFX,looping=false)->bool:
 	if music_enabled == false:
 		return false
+	var asp = AudioStreamPlayer.new()
+	asp.name = "SFX "
+	if volume_master > volume_sfx:
+		asp.volume_db = volume_sfx
+	else:
+		asp.volume_db = volume_master
 	var stream 
 	match id:
 		SFX.TankNormalExplosion:
@@ -126,17 +134,15 @@ func play_sfx(id:SFX,looping=false)->bool:
 			stream = tower_missile_shoot
 		SFX.TowerNormalShoot:
 			stream = tower_normal_shoot
+		SFX.HealthReduced:
+			asp.volume_db += linear_to_db(10)
+			stream = health_reduced
 		_:
 			push_error("SFX ",id," not found")
 			return false
 			
-	var asp = AudioStreamPlayer.new()
+	
 	asp.stream = stream
-	asp.name = "SFX "
-	if volume_master > volume_sfx:
-		asp.volume_db = volume_sfx
-	else:
-		asp.volume_db = volume_master
 		
 	add_child(asp)
 	asp.play()
