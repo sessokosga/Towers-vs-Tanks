@@ -41,3 +41,5 @@ offset_right = 191.0
 offset_bottom = 89.0
 theme_override_font_sizes/font_size = 30
 text = "← Back"
+
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]

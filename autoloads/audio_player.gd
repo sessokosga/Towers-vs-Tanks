@@ -31,9 +31,9 @@ enum Music{
 			stop_music_loop()
 
 # UI
-#const ui_select = preload("res://assets/audio/ui/Analog Synthesized UI - Button Click Tone 1.wav")
-#const ui_confirm = preload("res://assets/audio/ui/Success 2a.wav")
-#const ui_reward = preload("res://assets/audio/ui/The Chris Alan - 8-Bit SFX & UI - Eerie Notification 10.wav")
+const ui_select = preload("res://ui/assets/audio/sfx/Analog Synthesized UI - Button Click Tone 1.wav")
+const ui_confirm = preload("res://ui/assets/audio/sfx/Success 2a.wav")
+const ui_reward = preload("res://ui/assets/audio/sfx/The Chris Alan - 8-Bit SFX & UI - Eerie Notification 10.wav")
 
 # Music
 
@@ -47,6 +47,10 @@ const tank_shoot_big = preload("res://tanks/assets/audio/sfx/gun_silenced_sniper
 const tower_normal_explosion = preload("res://towers/assets/audio/sfx/DeepExplosion02.wav")
 const tower_normal_shoot = preload("res://towers/assets/audio/sfx/Assault Rifle - M4 - 03 - Burst 03.wav")
 const tower_missile_shoot = preload("res://towers/assets/audio/sfx/Cocking_11.wav")
+
+var volume_master : float = -24
+var volume_sfx : float = 0
+var volume_music : float = 0
 
 var current_music_loop_id : Music
 var current_music_loop : AudioStreamPlayer = null
@@ -63,37 +67,41 @@ func _ready() -> void:
 	#if music_enabled:
 		#play_music(Music.DeadWalking,true)
 
-#func play_ui(id:UI,looping=false)->bool:
-	#if music_enabled == false:
-		#return false
-	#var stream 
-	#match id:
-		#UI.Select:
-			#stream = ui_select
-		#UI.Confirm:
-			#stream = ui_confirm
-		#UI.RewardUnlocked:
-			#stream = ui_reward
-		#_:
-			#push_error("UI sound ",id," not found")
-			#return false
-			#
-	#var asp = AudioStreamPlayer.new()
-	#asp.stream = stream
-	#asp.name = "UI "
-	#add_child(asp)
-	#asp.play()
-	#
-	#asp.finished.connect(
-		#func()->void:
-			#if looping:
-				#asp.stream_paused = false
-				#asp.play()
-			#else:
-				#asp.queue_free()
-			#
-			#)
-	#return true
+func play_ui(id:UI,looping=false)->bool:
+	if music_enabled == false:
+		return false
+	var stream 
+	match id:
+		UI.Select:
+			stream = ui_select
+		UI.Confirm:
+			stream = ui_confirm
+		UI.RewardUnlocked:
+			stream = ui_reward
+		_:
+			push_error("UI sound ",id," not found")
+			return false
+			
+	var asp = AudioStreamPlayer.new()
+	asp.stream = stream
+	asp.name = "UI "
+	if volume_master > volume_sfx:
+		asp.volume_db = volume_sfx
+	else:
+		asp.volume_db = volume_master
+	add_child(asp)
+	asp.play()
+	
+	asp.finished.connect(
+		func()->void:
+			if looping:
+				asp.stream_paused = false
+				asp.play()
+			else:
+				asp.queue_free()
+			
+			)
+	return true
 
 func play_sfx(id:SFX,looping=false)->bool:
 	if music_enabled == false:
@@ -125,6 +133,11 @@ func play_sfx(id:SFX,looping=false)->bool:
 	var asp = AudioStreamPlayer.new()
 	asp.stream = stream
 	asp.name = "SFX "
+	if volume_master > volume_sfx:
+		asp.volume_db = volume_sfx
+	else:
+		asp.volume_db = volume_master
+		
 	add_child(asp)
 	asp.play()
 	
@@ -169,6 +182,10 @@ func play_music(id:Music,looping = false)->AudioStreamPlayer:
 	asp.stream = loop
 	#asp.volume_db = linear_to_db(0)
 	asp.name = "Music Loop"
+	if volume_master > volume_sfx:
+		asp.volume_db = volume_sfx
+	else:
+		asp.volume_db = volume_master
 	add_child(asp)
 	asp.play()
 	#rising_music = asp

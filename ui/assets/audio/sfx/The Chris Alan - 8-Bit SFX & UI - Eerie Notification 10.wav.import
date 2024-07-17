@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6qck7kpqs3ab"
+path="res://.godot/imported/The Chris Alan - 8-Bit SFX & UI - Eerie Notification 10.wav-cb56e59b4cdaf9011f63ff61506ee126.sample"
+
+[deps]
+
+source_file="res://ui/assets/audio/sfx/The Chris Alan - 8-Bit SFX & UI - Eerie Notification 10.wav"
+dest_files=["res://.godot/imported/The Chris Alan - 8-Bit SFX & UI - Eerie Notification 10.wav-cb56e59b4cdaf9011f63ff61506ee126.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

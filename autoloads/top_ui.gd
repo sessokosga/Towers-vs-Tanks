@@ -26,3 +26,8 @@ func hide_all()->void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide_all()
+
+
+func _on_back_btn_pressed() -> void:
+	AudioPlayer.play_ui(AudioPlayer.UI.Select)
+pass # Replace with function body.

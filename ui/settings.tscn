@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://7uufmflvew6r"]
+
+[ext_resource type="Script" path="res://ui/settings.gd" id="1_gceyt"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gceyt")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 165.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 396.0
+offset_top = 132.0
+offset_right = 732.0
+offset_bottom = 283.0
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Master" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="VBoxContainer/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Master"
+
+[node name="MasterVolume" type="HSlider" parent="VBoxContainer/Master"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+min_value = -60.0
+max_value = 0.0
+
+[node name="SFX" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SFX" type="Label" parent="VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "SFX"
+
+[node name="SFXVolume" type="HSlider" parent="VBoxContainer/SFX"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = -60.0
+max_value = 0.0
+
+[node name="Music" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Music" type="Label" parent="VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="MusicVolume" type="HSlider" parent="VBoxContainer/Music"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -60.0
+max_value = 0.0
+
+[connection signal="value_changed" from="VBoxContainer/Master/MasterVolume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SFX/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Music/MusicVolume" to="." method="_on_music_volume_value_changed"]

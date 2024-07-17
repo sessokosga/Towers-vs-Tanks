@@ -6,7 +6,6 @@ func _ready() -> void:
 	TopUI.hide_loading_screen()
 	TopUI.connect_to_back_button(_on_back_btn_pressed)
 	TopUI.show_back_button()
-	print("lolipop")
 	pass
 
 func _on_back_btn_pressed()->void:
