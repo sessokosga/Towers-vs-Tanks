@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxsrgg3gjmurv"]
 
 [ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_0face"]
-[ext_resource type="Texture2D" uid="uid://4xyrksjamfy4" path="res://rewards/assets/images/towerDefense_tile043_grayscale.png" id="2_jkk00"]
+[ext_resource type="Texture2D" uid="uid://b8beobkp73pga" path="res://assets/images/towers/towerDefense_tile043_grayscale.png" id="2_jkk00"]
 
 [node name="Reward" instance=ExtResource("1_0face")]
 effect = 1
 type = 3
 
-[node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+[node name="TextureRect" parent="Reward/HBoxContainer" index="1"]
 texture = ExtResource("2_jkk00")
 
-[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="0"]
+[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
 text = "heal me"
 
-[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
+[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
 text = "Gain two health points"

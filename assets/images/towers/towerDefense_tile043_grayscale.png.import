@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b37pb1j2ev4ii"
-path="res://.godot/imported/towerDefense_tile204_grayscale.png-c3d29fd35fd3be86a012ec03efa742ec.ctex"
+uid="uid://b8beobkp73pga"
+path="res://.godot/imported/towerDefense_tile043_grayscale.png-05857e7b7b0cddaf74ec18f57973b91d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rewards/assets/images/towerDefense_tile204_grayscale.png"
-dest_files=["res://.godot/imported/towerDefense_tile204_grayscale.png-c3d29fd35fd3be86a012ec03efa742ec.ctex"]
+source_file="res://assets/images/towers/towerDefense_tile043_grayscale.png"
+dest_files=["res://.godot/imported/towerDefense_tile043_grayscale.png-05857e7b7b0cddaf74ec18f57973b91d.ctex"]
 
 [params]
 

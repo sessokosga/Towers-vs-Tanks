@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7mhtrbgiu2tg"]
 
 [ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_dfyyh"]
-[ext_resource type="Texture2D" uid="uid://d0uru0nl8m4rn" path="res://rewards/assets/images/towerDefense_tile272_grayscale.png" id="2_lsiko"]
+[ext_resource type="Texture2D" uid="uid://1m2gcmmgxwfd" path="res://assets/images/objects/towerDefense_tile272_grayscale.png" id="2_lsiko"]
 
 [node name="Reward" instance=ExtResource("1_dfyyh")]
 effect = 2
@@ -10,8 +10,8 @@ type = 1
 [node name="TextureRect" parent="Reward/HBoxContainer" index="1"]
 texture = ExtResource("2_lsiko")
 
-[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="0"]
+[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
 text = "more money"
 
-[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
+[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
 text = "Gain 1 000 coins"

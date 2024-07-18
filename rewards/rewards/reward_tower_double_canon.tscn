@@ -1,17 +1,31 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddbbjp533fshq"]
 
 [ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_q2c31"]
-[ext_resource type="Texture2D" uid="uid://ctipt4bpulgi" path="res://rewards/assets/images/towerDefense_tile250_grayscale.png" id="2_qrlkp"]
+[ext_resource type="Texture2D" uid="uid://cuny21yco4nok" path="res://assets/images/towers/towerDefense_tile250_grayscale.png" id="2_qrlkp"]
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_q2c31")]
 effect = 3
 id = "tower250"
 
-[node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+[node name="TextureRect" parent="Reward/HBoxContainer" index="1"]
 texture = ExtResource("2_qrlkp")
 
-[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="0"]
+[node name="HBoxContainer" parent="Reward/HBoxContainer/TextureRect" index="0"]
+visible = true
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 118.0
+offset_right = 59.0
+offset_bottom = 146.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
 text = "Double canon"
 
-[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
-text = "Shoots two times more canon"
+[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
+text = "Shoots two times more canon
+Damage : 2 x 2"

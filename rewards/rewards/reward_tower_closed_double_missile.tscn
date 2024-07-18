@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq6avf5v4hi76"]
 
 [ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_uv3p3"]
-[ext_resource type="Texture2D" uid="uid://b37pb1j2ev4ii" path="res://rewards/assets/images/towerDefense_tile204_grayscale.png" id="2_7ennl"]
+[ext_resource type="Texture2D" uid="uid://obaitwoa7wtm" path="res://assets/images/towers/towerDefense_tile204_grayscale.png" id="2_7ennl"]
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_uv3p3")]
 custom_minimum_size = Vector2(359, 163)
@@ -11,14 +11,14 @@ id = "tower204"
 [node name="HBoxContainer" parent="Reward" index="0"]
 theme_override_constants/separation = 25
 
-[node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+[node name="TextureRect" parent="Reward/HBoxContainer" index="1"]
 custom_minimum_size = Vector2(82, 0)
 size_flags_horizontal = 0
 texture = ExtResource("2_7ennl")
 stretch_mode = 3
 
-[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="0"]
+[node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
 text = "light MISSILE "
 
-[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="1"]
+[node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
 text = "Shoot twice light missile. Faster shoot"

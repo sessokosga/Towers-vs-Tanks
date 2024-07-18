@@ -2,6 +2,8 @@ class_name Tank extends CharacterBody2D
 
 enum CanonType {Mono, Double, Triple}
 enum Type {Base}
+enum State {Alive,Dead}
+
 
 signal arrived(tank)
 signal dead(tank)
@@ -11,6 +13,7 @@ signal out_of_screen(tank)
 @export var id : String
 @export var speed = 300.0
 @export var solidity : float = 5
+@export var damage : float = 1
 @export var cooldown : float = .8
 @export var canon_type : CanonType = CanonType.Mono
 @export var type : Type = Type.Base
@@ -29,6 +32,7 @@ signal out_of_screen(tank)
 
 
 var direction : Vector2
+var state = State.Alive
 var shoot_timer = 0.5
 var enemy : Tower = null
 var target : Vector2
@@ -52,6 +56,7 @@ func _shoot(direction : Vector2)->void:
 	var projectile : Projectile = projectile_scene.instantiate()
 	projectile.speed = projectile_speed + 700
 	projectile.direction = direction
+	projectile.damage = damage
 	add_child(projectile)
 	projectile.global_position = projectile_starting.global_position
 	projectile.global_rotation = projectile_starting.global_rotation
@@ -73,7 +78,7 @@ func _physics_process(delta: float) -> void:
 		
 		# Handle shoots
 		shoot_timer -= delta
-		if shoot_timer <= 0 and is_instance_valid(enemy):
+		if shoot_timer <= 0 and is_instance_valid(enemy) and enemy.state == Tower.State.Alive:
 			shoot_timer = cooldown
 			_shoot(direction)
 		
@@ -102,6 +107,7 @@ func _physics_process(delta: float) -> void:
 		
 func explode()->void:
 	AudioPlayer.play_sfx(AudioPlayer.SFX.TankNormalExplosion)
+	state = State.Dead
 	body.hide()
 	barrel.hide()
 	lab_solidity.hide()

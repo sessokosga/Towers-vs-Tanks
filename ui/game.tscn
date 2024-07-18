@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1y7606u08gmw"]
+[gd_scene load_steps=13 format=3 uid="uid://b1y7606u08gmw"]
 
 [ext_resource type="Script" path="res://ui/game.gd" id="1_wlqq4"]
 [ext_resource type="PackedScene" uid="uid://dtv1fsyvvbca7" path="res://ui/tower_button.tscn" id="3_6qfyv"]
@@ -6,6 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://b3uplsa2k3apd" path="res://ui/assets/images/towerDefense_tile249_grayscale.png" id="4_r4ulb"]
 [ext_resource type="PackedScene" uid="uid://h05xap187a4v" path="res://levels/base_level.tscn" id="4_sffyr"]
 [ext_resource type="Texture2D" uid="uid://d3acn4h5yo831" path="res://ui/assets/images/pause.png" id="6_1vs0m"]
+[ext_resource type="Texture2D" uid="uid://bved704oh32bh" path="res://towers/assets/images/towerDefense_tile250.png" id="6_womot"]
+[ext_resource type="Texture2D" uid="uid://cuny21yco4nok" path="res://assets/images/towers/towerDefense_tile250_grayscale.png" id="7_3qaqi"]
+[ext_resource type="Texture2D" uid="uid://bpq5juel36ptf" path="res://ui/assets/images/towerDefense_tile250_hover.png" id="7_ccnyu"]
+[ext_resource type="Texture2D" uid="uid://clobsdltco0r1" path="res://ui/assets/images/towerDefense_tile206.png" id="9_iawdu"]
+[ext_resource type="Texture2D" uid="uid://dpbphhdnghk86" path="res://ui/assets/images/towerDefense_tile206_hover.png" id="10_wpnpk"]
+[ext_resource type="Texture2D" uid="uid://bxng0p8fuyuwd" path="res://assets/images/towers/towerDefense_tile206_grayscale.png" id="11_0d3xe"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -60,11 +66,31 @@ offset_right = 100.0
 offset_bottom = 120.0
 grow_horizontal = 2
 
-[node name="TowerButton" parent="Gameplay/HUD/TowerButtons" instance=ExtResource("3_6qfyv")]
+[node name="SingleCanon" parent="Gameplay/HUD/TowerButtons" instance=ExtResource("3_6qfyv")]
 layout_mode = 2
 texture_hover = ExtResource("4_icn8f")
 texture_disabled = ExtResource("4_r4ulb")
+id = "tower249"
 cost = 75
+
+[node name="DoubleCanon" parent="Gameplay/HUD/TowerButtons" instance=ExtResource("3_6qfyv")]
+layout_mode = 2
+texture_normal = ExtResource("6_womot")
+texture_hover = ExtResource("7_ccnyu")
+texture_disabled = ExtResource("7_3qaqi")
+type = 1
+id = "tower250"
+cost = 125
+
+[node name="SingleMissile" parent="Gameplay/HUD/TowerButtons" instance=ExtResource("3_6qfyv")]
+layout_mode = 2
+texture_normal = ExtResource("9_iawdu")
+texture_hover = ExtResource("10_wpnpk")
+texture_disabled = ExtResource("11_0d3xe")
+stretch_mode = 6
+type = 2
+id = "tower206"
+cost = 150
 
 [node name="Health" type="Label" parent="Gameplay/HUD"]
 unique_name_in_owner = true
@@ -95,6 +121,7 @@ text = "Wave : 1"
 
 [node name="BaseScreen" type="Control" parent="Gameplay/HUD"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

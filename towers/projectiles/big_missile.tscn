@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjv6c8dhqhixx"]
+
+[ext_resource type="Script" path="res://common/projectile.gd" id="1_gwsqf"]
+[ext_resource type="Texture2D" uid="uid://vmx8wuuekpfp" path="res://towers/assets/images/towerDefense_tile252.png" id="2_t25r6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kwp"]
+radius = 6.0
+height = 44.0
+
+[node name="Missile" type="Area2D" groups=["bullet"]]
+script = ExtResource("1_gwsqf")
+from = 1
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_t25r6")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CapsuleShape2D_x8kwp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

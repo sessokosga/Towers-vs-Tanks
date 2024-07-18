@@ -8,12 +8,18 @@ signal toggled_it(tb)
 signal pressed_me(tb)
 
 @export var type : Tower.Type
+@export var id : String = ""
 @export var cost:int:
 	set(v):
 		cost = v
 		if not is_instance_valid(lab_cost):
 			return
 		lab_cost.text = str(cost)
+		
+static var tower_nodes : Dictionary = {
+	"tower249" : load("res://ui/tower_button.tscn"),
+	"tower250" : load("res://towers/tower_double_canon.tscn")
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,3 +37,6 @@ func _on_toggled(toggled_on: bool) -> void:
 
 func _on_pressed() -> void:
 	pressed_me.emit(self)
+	
+static func get_instance(id:String)->Tower:
+	return tower_nodes[id].instantiate()

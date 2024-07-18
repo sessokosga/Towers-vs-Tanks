@@ -11,6 +11,7 @@ enum Target {Tank, Tower}
 var speed : float
 var direction : Vector2
 var screen_size : Vector2
+var damage : float = 1 
 var ignore = false
 
 # Called when the node enters the scene tree for the first time.
@@ -21,14 +22,14 @@ func _ready() -> void:
 
 func _on_area_entered(area:Area2D)->void:
 	if area is Tower and from == Target.Tank and to == Target.Tower and not ignore:
-		area.take_damage(1)
+		area.take_damage(damage)
 		ignore = true
 		hide()
 		queue_free()
 
 func _on_body_entered(body:Node2D)->void:
 	if body is Tank and from == Target.Tower and to == Target.Tank and not ignore:
-		body.take_damage(1)
+		body.take_damage(damage)
 		ignore = true
 		hide()
 		queue_free()

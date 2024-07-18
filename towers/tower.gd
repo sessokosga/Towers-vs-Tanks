@@ -2,7 +2,8 @@ class_name Tower extends Area2D
 
 enum CanonType {Mono, Double}
 enum UnlockConditions {None, }
-enum Type {Base}
+enum Type {Base,DoubleCanon, SingleMissile}
+enum State {Alive,Dead}
 
 signal dead(tower)
 
@@ -27,15 +28,23 @@ signal dead(tower)
 @onready var hit_area : CollisionShape2D = $"%CollisionShape"
 @onready var _range : Area2D = $"%Range"
 @onready var projectile_starting : Sprite2D = $"%Projectile"
+@onready var projectile_starting2 : Sprite2D = $"%Projectile2"
 @onready var explosion_sprites : AnimatedSprite2D = $Explosion
 @onready var lab_solidity : Label = $"%LabelSolidity"
 
 
 var shoot_timer = 0
+var state = State.Alive
 var peace_mode = false
 var enemy : Tank = null
 var cell : Vector2i
 var frozen = false
+
+static var tower_nodes : Dictionary = {
+	"tower249" : preload("res://towers/tower_single_canon.tscn"),
+	"tower250" : preload("res://towers/tower_double_canon.tscn"),
+	"tower206" : preload("res://towers/tower_single_missile.tscn"),
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,17 +61,18 @@ func _aim_at_enemy()->Vector2:
 		body.rotation = deg_to_rad(initial_body_rotation)
 	return Vector2.ZERO
 
-func shoot(direction : Vector2)->void:
+func shoot(direction : Vector2,starting : Sprite2D = null)->void:
 	AudioPlayer.play_sfx(AudioPlayer.SFX.TowerNormalShoot)
 	var projectile : Projectile = projectile_scene.instantiate()
 	projectile.speed = projectile_speed + 700
+	projectile.damage = damage
 	projectile.direction = direction
 	projectile.global_rotation = projectile_starting.global_rotation
-	projectile_starting.add_child(projectile)
 	var pos = projectile.position
-	projectile_starting.remove_child(projectile)
+	if starting == null:
+		starting = projectile_starting
 	add_child(projectile)
-	projectile.global_position = projectile_starting.global_position
+	projectile.global_position = starting.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -83,12 +93,15 @@ func _process(delta: float) -> void:
 		
 		# Handle shoots
 		shoot_timer -= delta
-		if shoot_timer <= 0 and is_instance_valid(enemy):
+		if shoot_timer <= 0 and is_instance_valid(enemy) and enemy.state == Tank.State.Alive:
 			shoot_timer = cooldown
 			shoot(direction)
+			if canon_type == CanonType.Double:
+				shoot(direction,projectile_starting2)
 		
 func explode()->void:
 	AudioPlayer.play_sfx(AudioPlayer.SFX.TowerNormalExplosion)
+	state = State.Dead
 	body.hide()
 	base.hide()
 	lab_solidity.hide()
@@ -106,3 +119,6 @@ func take_damage(dmg:float)->void:
 	if solidity <= 0:
 		dead.emit(self)
 		explode()
+		
+static func get_instance(id:String)->Tower:
+	return tower_nodes[id].instantiate()

@@ -18,8 +18,7 @@ enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 @onready var btn_next_wave : Button = $"%NextWave"
 
 
-var tower_node =  preload("res://towers/tower.tscn")
-var tank_node = preload("res://tanks/tank.tscn")
+var tank_node = load("res://tanks/tank.tscn")
 
 var starting_towers : Array = []
 var unlocked_towers : Array = []
@@ -72,6 +71,7 @@ func _ready() -> void:
 	_start_wave()
 	for tb : TowerButton in tower_buttons.get_children():
 		tb.toggled_it.connect(_on_tower_button_toggled)
+	_load_starting_towers()
 	_load_rewards()
 	
 	TopUI.hide_loading_screen()
@@ -95,7 +95,7 @@ func _on_tower_destroyed(tower:Tower)->void:
 func _deploy_tower(cell:Vector2i)->void:
 	if occupied_cells.has(cell) or not is_instance_valid(selected_tower_button):
 		return
-	var tower = tower_node.instantiate()
+	var tower : Tower = Tower.get_instance(selected_tower_button.id)
 	tower.cell = cell
 	tower.global_position = (cell * 128) + Vector2i(25,38)
 	towers_parent.add_child(tower)
@@ -276,17 +276,24 @@ func _apply_reward()->void:
 	match selected_reward.effect:
 		Reward.Effect.AddTwoTowerPlace:
 			level.add_tower_places(2) 
-			if not level.is_empty_spot_available:
-				selected_reward.removed = true
+			#if not level.is_empty_spot_available:
+				#selected_reward.removed = true
 		Reward.Effect.AddTwoHealthPoints:
 			health += 2
 		Reward.Effect.AddThousandCoins:
 			money += 1000
-		#Reward.Effect.DoubleCanon:
-			#tb_double_canon.disabled = false
-			#tb_double_canon.show()
-			#check_tower_purchase_availabity()
-			#selected_reward.removed = true
+		Reward.Effect.SingleCanon:
+			_check_afordable_towers()
+			_add_tower_type(Tower.Type.Base)
+			selected_reward.removed = true
+		Reward.Effect.DoubleCanon:
+			_check_afordable_towers()
+			_add_tower_type(Tower.Type.DoubleCanon)
+			selected_reward.removed = true
+		Reward.Effect.SingleMissile:
+			_check_afordable_towers()
+			_add_tower_type(Tower.Type.SingleMissile)
+			selected_reward.removed = true
 		#Reward.Effect.OpenSingleMissile:
 			#tb_open_single_missile.disabled = false
 			#tb_open_single_missile.show()
@@ -302,3 +309,18 @@ func _apply_reward()->void:
 			#tb_closed_double_missile.show()
 			#check_tower_purchase_availabity()
 			#selected_reward.removed = true
+
+func _add_tower_type(type:Tower.Type)->void:
+	tower_buttons.get_children().any(
+		func (tb:TowerButton):
+			if tb.type == type:
+				tb.show()
+	)
+
+func _load_starting_towers()->void:
+	tower_buttons.get_children().any(func(tb): tb.hide())
+	for id in starting_towers:
+		for tb : TowerButton in tower_buttons.get_children():
+			if tb.id == id:
+				tb.show()
+			
