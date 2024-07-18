@@ -17,9 +17,12 @@ enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 @onready var screeen_base : Control = $"%BaseScreen"
 @onready var btn_next_wave : Button = $"%NextWave"
 
+
 var tower_node =  preload("res://towers/tower.tscn")
 var tank_node = preload("res://tanks/tank.tscn")
 
+var starting_towers : Array = []
+var unlocked_towers : Array = []
 var selected_reward : Reward = null
 var selected_tower_button :TowerButton = null
 var occupied_cells : Array[Vector2i]=[]
@@ -60,8 +63,9 @@ var money :
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	TopUI.hide_loading_screen()
-	current_state = State.Playing
+	unlocked_towers = PlayerData.retreive_unlocked_towers()
+	starting_towers = PlayerData.retreive_starting_towers()
+	
 	health = 20
 	money = 250
 	current_wave = 0
@@ -70,6 +74,8 @@ func _ready() -> void:
 		tb.toggled_it.connect(_on_tower_button_toggled)
 	_load_rewards()
 	
+	TopUI.hide_loading_screen()
+	current_state = State.WaveCompleted
 	
 func _on_tower_button_toggled(tb:TowerButton)->void:
 	if tb.button_pressed:
@@ -101,7 +107,6 @@ func _deploy_tower(cell:Vector2i)->void:
 func _process(delta: float) -> void:
 	if current_state == State.Pause:
 		return
-	
 	if wave_started and spawned_tanks < level.TANKS_PER_WAVE[current_wave] :
 		spanw_tank_timer -= delta
 		if spanw_tank_timer <=0:
@@ -187,11 +192,9 @@ func _handle_state_changes()->void:
 			screeen_base.show()
 			screeen_victory.show()
 
-
 func _on_restart_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
 	get_tree().reload_current_scene()
-
 
 func _on_home_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
@@ -223,10 +226,8 @@ func check_wave_completion()->void:
 				if health > 0:
 					current_state = State.Victory
 
-
 func _on_tanks_parent_child_order_changed() -> void:
 	check_wave_completion()
-
 
 func _on_next_wave_pressed() -> void:
 	current_state = State.Playing
@@ -234,8 +235,6 @@ func _on_next_wave_pressed() -> void:
 	_apply_reward()
 	_start_wave()
 	btn_next_wave.disabled = true
-	
-
 
 func _on_texture_button_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
@@ -256,8 +255,13 @@ func _load_rewards()->void:
 		var reward_node :PackedScene = load(str(dir_path,'/',file))
 		
 		var reward : Reward = reward_node.instantiate()
-		reward.active.connect(_on_reward_active)
-		rewards_parent.add_child(reward)
+		if reward.type == Reward.Type.Tower:
+			if unlocked_towers.has(reward.id) and not starting_towers.has(reward.id):
+				reward.active.connect(_on_reward_active)
+				rewards_parent.add_child(reward)
+		else:
+			reward.active.connect(_on_reward_active)
+			rewards_parent.add_child(reward)
 	
 func _add_rewards(num)->void:
 	var trials = 0

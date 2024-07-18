@@ -34,6 +34,9 @@ theme_type_variation = &"RewardPanel"
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="Control" type="Control" parent="Reward/HBoxContainer"]
+layout_mode = 2
+
 [node name="TextureRect" type="TextureRect" parent="Reward/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
@@ -46,8 +49,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
+[node name="Control" type="Control" parent="Reward/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="Title" type="Label" parent="Reward/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 45)
+custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Transporter  "

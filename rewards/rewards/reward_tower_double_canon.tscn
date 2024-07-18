@@ -5,6 +5,7 @@
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_q2c31")]
 effect = 3
+id = "tower250"
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
 texture = ExtResource("2_qrlkp")

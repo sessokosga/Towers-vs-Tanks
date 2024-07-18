@@ -6,11 +6,13 @@
 [node name="TowerDoubleCanon" instance=ExtResource("1_uv3p3")]
 custom_minimum_size = Vector2(359, 163)
 effect = 6
+id = "tower204"
 
 [node name="HBoxContainer" parent="Reward" index="0"]
 theme_override_constants/separation = 25
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(82, 0)
 size_flags_horizontal = 0
 texture = ExtResource("2_7ennl")
 stretch_mode = 3

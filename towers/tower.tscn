@@ -45,6 +45,7 @@ position = Vector2(42, 64)
 script = ExtResource("1_4sp23")
 cost = 75
 solidity = 6.0
+id = "tower249"
 projectile_speed = 20.0
 projectile_scene = ExtResource("2_t41cw")
 

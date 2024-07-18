@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmfu8gjenuqmt" path="res://rewards/assets/images/towerDefense_tile042_grayscale.png" id="2_1pn2s"]
 
 [node name="Reward" instance=ExtResource("1_ory7f")]
+type = 2
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
 texture = ExtResource("2_1pn2s")

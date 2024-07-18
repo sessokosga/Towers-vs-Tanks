@@ -5,6 +5,7 @@
 
 [node name="Reward" instance=ExtResource("1_0face")]
 effect = 1
+type = 3
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
 texture = ExtResource("2_jkk00")

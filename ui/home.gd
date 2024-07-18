@@ -1,9 +1,9 @@
 extends Control
 
-
 @onready var home : Control = $"%Home"
 
-@export var by_pass = false
+@export var by_pass : ScreenState
+
 
 enum ScreenState {Home, Credits, Play, Upgrade,Settings}
 var current_screen:ScreenState :
@@ -30,10 +30,8 @@ func _change_state(new_state : ScreenState)->void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if by_pass:
-		current_screen = ScreenState.Play
-	else:
-		current_screen = ScreenState.Home
+	PlayerData.init()
+	current_screen = by_pass 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

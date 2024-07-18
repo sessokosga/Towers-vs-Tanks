@@ -6,10 +6,14 @@ enum Effect {
 	OpenDoubleMissile, ClosedDoubleMissile
 }
 
+enum Type {Tower, Money, Place, Health, Damage, Cooldown}
+
 signal active(reward)
 
 @onready var bg_color : ColorRect = $"%BGColor"
 @export var effect :Effect
+@export var type : Type
+@export var id : String = "none"
 
 var disabled = false
 var removed = false :

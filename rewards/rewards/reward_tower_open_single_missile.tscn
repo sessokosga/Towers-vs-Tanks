@@ -5,8 +5,10 @@
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_sugcl")]
 effect = 4
+id = "tower206"
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(80, 0)
 texture = ExtResource("2_yfq4v")
 stretch_mode = 3
 

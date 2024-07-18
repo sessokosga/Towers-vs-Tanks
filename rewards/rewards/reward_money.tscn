@@ -5,8 +5,9 @@
 
 [node name="Reward" instance=ExtResource("1_dfyyh")]
 effect = 2
+type = 1
 
-[node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+[node name="TextureRect" parent="Reward/HBoxContainer" index="1"]
 texture = ExtResource("2_lsiko")
 
 [node name="Title" parent="Reward/HBoxContainer/VBoxContainer" index="0"]

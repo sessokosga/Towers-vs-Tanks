@@ -21,6 +21,7 @@ config/icon="res://towers/assets/images/towerDefense_tile249.png"
 
 TopUI="*res://autoloads/top_ui.tscn"
 AudioPlayer="*res://autoloads/audio_player.tscn"
+PlayerData="*res://autoloads/player_data.gd"
 
 [display]
 
