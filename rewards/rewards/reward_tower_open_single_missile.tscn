@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs8yduxhymjxq"]
 
-[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/reward.tscn" id="1_sugcl"]
-[ext_resource type="Texture2D" uid="uid://dhrn5j06ltopq" path="res://assets/images/Objects/towerDefense_tile206_grayscale.png" id="2_yfq4v"]
+[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_sugcl"]
+[ext_resource type="Texture2D" uid="uid://7qr73er28cmp" path="res://rewards/assets/images/towerDefense_tile206_grayscale.png" id="2_yfq4v"]
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_sugcl")]
 effect = 4

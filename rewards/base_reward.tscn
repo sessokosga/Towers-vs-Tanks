@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://xpsf2rsnbwgs"]
 
 [ext_resource type="Script" path="res://rewards/reward.gd" id="1_71ch4"]
-[ext_resource type="Texture2D" uid="uid://cnykxi1i3sjfh" path="res://assets/images/Objects/bulletBlue2.png" id="2_y4s36"]
+[ext_resource type="Texture2D" uid="uid://df0e2jccgtld0" path="res://rewards/assets/images/bulletBlue2.png" id="2_y4s36"]
 
 [node name="Reward" type="Control"]
 custom_minimum_size = Vector2(323, 163)
@@ -47,7 +47,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="Reward/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Transporter  "

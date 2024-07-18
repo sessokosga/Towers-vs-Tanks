@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq6avf5v4hi76"]
 
-[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/reward.tscn" id="1_uv3p3"]
-[ext_resource type="Texture2D" uid="uid://rjbgdemiojll" path="res://assets/images/Objects/towerDefense_tile204_grayscale.png" id="2_7ennl"]
+[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_uv3p3"]
+[ext_resource type="Texture2D" uid="uid://b37pb1j2ev4ii" path="res://rewards/assets/images/towerDefense_tile204_grayscale.png" id="2_7ennl"]
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_uv3p3")]
 custom_minimum_size = Vector2(359, 163)

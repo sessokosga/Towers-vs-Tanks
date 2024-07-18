@@ -31,7 +31,7 @@ func _change_state(new_state : ScreenState)->void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if by_pass:
-		current_screen = ScreenState.Settings
+		current_screen = ScreenState.Play
 	else:
 		current_screen = ScreenState.Home
 	

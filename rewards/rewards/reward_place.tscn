@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqvxqneg3sog0"]
 
-[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/reward.tscn" id="1_ory7f"]
-[ext_resource type="Texture2D" uid="uid://cdxg7hh67vjyo" path="res://assets/images/Objects/towerDefense_tile042_grayscale.png" id="2_1pn2s"]
+[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_ory7f"]
+[ext_resource type="Texture2D" uid="uid://dmfu8gjenuqmt" path="res://rewards/assets/images/towerDefense_tile042_grayscale.png" id="2_1pn2s"]
 
 [node name="Reward" instance=ExtResource("1_ory7f")]
 

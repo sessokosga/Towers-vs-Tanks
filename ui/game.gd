@@ -6,6 +6,7 @@ enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 @onready var level : Level = $"%BaseLevel"
 @onready var towers_parent : Control = $"%TowersParent"
 @onready var tanks_parent : Control = $"%TanksParent"
+@onready var rewards_parent : HBoxContainer = $"%RewardsParent"
 @onready var lab_health : Label = $"%Health"
 @onready var lab_money : Label = $"%Money"
 @onready var lab_wave : Label = $"%Wave"
@@ -14,12 +15,15 @@ enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 @onready var screeen_pause : Control = $"%Pause"
 @onready var screeen_victory : Control = $"%Victory"
 @onready var screeen_base : Control = $"%BaseScreen"
+@onready var btn_next_wave : Button = $"%NextWave"
 
 var tower_node =  preload("res://towers/tower.tscn")
 var tank_node = preload("res://tanks/tank.tscn")
 
+var selected_reward : Reward = null
 var selected_tower_button :TowerButton = null
 var occupied_cells : Array[Vector2i]=[]
+var rewards_list : Array[Reward]=[]
 var peace_mode = false
 var spawned_tanks = 0
 var wave_started = false
@@ -64,6 +68,7 @@ func _ready() -> void:
 	_start_wave()
 	for tb : TowerButton in tower_buttons.get_children():
 		tb.toggled_it.connect(_on_tower_button_toggled)
+	_load_rewards()
 	
 	
 func _on_tower_button_toggled(tb:TowerButton)->void:
@@ -226,9 +231,70 @@ func _on_tanks_parent_child_order_changed() -> void:
 func _on_next_wave_pressed() -> void:
 	current_state = State.Playing
 	current_wave += 1
+	_apply_reward()
 	_start_wave()
+	btn_next_wave.disabled = true
+	
 
 
 func _on_texture_button_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
 	current_state = State.Pause
+	
+func _on_reward_active(rwd:Reward)->void:
+	btn_next_wave.disabled = false
+	selected_reward = rwd
+	AudioPlayer.play_ui(AudioPlayer.UI.Select)
+	for rw : Reward in rewards_parent.get_children():
+		if rwd != rw:
+			rw.selected = false
+	
+func _load_rewards()->void:
+	var dir_path = "res://rewards/rewards"
+	var files = DirAccess.open(dir_path)
+	for file in files.get_files():
+		var reward_node :PackedScene = load(str(dir_path,'/',file))
+		
+		var reward : Reward = reward_node.instantiate()
+		reward.active.connect(_on_reward_active)
+		rewards_parent.add_child(reward)
+	
+func _add_rewards(num)->void:
+	var trials = 0
+	const MAX_TRIALS = 40
+	var found = 0
+	while  found < num and trials < MAX_TRIALS:
+		var reward
+		 
+func _apply_reward()->void:
+	AudioPlayer.play_ui(AudioPlayer.UI.Confirm)
+	selected_reward.hide()
+	match selected_reward.effect:
+		Reward.Effect.AddTwoTowerPlace:
+			level.add_tower_places(2) 
+			if not level.is_empty_spot_available:
+				selected_reward.removed = true
+		Reward.Effect.AddTwoHealthPoints:
+			health += 2
+		Reward.Effect.AddThousandCoins:
+			money += 1000
+		#Reward.Effect.DoubleCanon:
+			#tb_double_canon.disabled = false
+			#tb_double_canon.show()
+			#check_tower_purchase_availabity()
+			#selected_reward.removed = true
+		#Reward.Effect.OpenSingleMissile:
+			#tb_open_single_missile.disabled = false
+			#tb_open_single_missile.show()
+			#check_tower_purchase_availabity()
+			#selected_reward.removed = true
+		#Reward.Effect.OpenDoubleMissile:
+			#tb_open_double_missile.disabled = false
+			#tb_open_double_missile.show()
+			#check_tower_purchase_availabity()
+			#selected_reward.removed = true
+		#Reward.Effect.ClosedDoubleMissile:
+			#tb_closed_double_missile.disabled = false
+			#tb_closed_double_missile.show()
+			#check_tower_purchase_availabity()
+			#selected_reward.removed = true

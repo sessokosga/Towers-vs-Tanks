@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqyv0hlmr3gwi"]
 
-[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/reward.tscn" id="1_g5msu"]
-[ext_resource type="Texture2D" uid="uid://1vfy8jq22m31" path="res://assets/images/Objects/towerDefense_tile205_grayscale.png" id="2_n5rkr"]
+[ext_resource type="PackedScene" uid="uid://xpsf2rsnbwgs" path="res://rewards/base_reward.tscn" id="1_g5msu"]
+[ext_resource type="Texture2D" uid="uid://c0axgreauwyg" path="res://rewards/assets/images/towerDefense_tile205_grayscale.png" id="2_n5rkr"]
 
 [node name="TowerDoubleCanon" instance=ExtResource("1_g5msu")]
 custom_minimum_size = Vector2(359, 163)
@@ -11,6 +11,7 @@ effect = 5
 theme_override_constants/separation = 25
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(96, 0)
 size_flags_horizontal = 0
 texture = ExtResource("2_n5rkr")
 stretch_mode = 3
