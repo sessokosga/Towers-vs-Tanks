@@ -39,8 +39,6 @@ func _on_body_entered(body:Node2D)->void:
 func _process(delta: float) -> void:
 	global_position += direction * speed * delta 
 	
-	#if collision_shape.shape.get_rect().has_point()
-	
 	if global_position.x - body.texture.get_width()/2 < 0 or global_position.x + body.texture.get_width()/2 > screen_size.x or \
 	global_position.y - body.texture.get_height()/2 <0 or global_position.y + body.texture.get_height()/2 > screen_size.y :
 		queue_free()

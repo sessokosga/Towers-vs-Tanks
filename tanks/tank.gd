@@ -1,7 +1,7 @@
 class_name Tank extends CharacterBody2D
 
 enum CanonType {Mono, Double, Triple}
-enum Type {Base}
+enum Type {Red, Green, Blue}
 enum State {Alive,Dead}
 
 
@@ -16,7 +16,7 @@ signal out_of_screen(tank)
 @export var damage : float = 1
 @export var cooldown : float = .8
 @export var canon_type : CanonType = CanonType.Mono
-@export var type : Type = Type.Base
+@export var type : Type = Type.Red
 @export var projectile_speed : float = 4
 @export var projectile_scene : PackedScene 
 @export var initial_barrel_rotation : float = 0
@@ -30,6 +30,11 @@ signal out_of_screen(tank)
 @onready var _range : Area2D = $"%Range"
 @onready var hit_area : CollisionShape2D = $"%CollisionShape"
 
+static var tank_nodes : Dictionary = {
+	"red" : preload("res://tanks/tank_red.tscn"),
+	"green" : preload("res://tanks/tank_green.tscn"),
+	"blue" : preload("res://tanks/tank_blue.tscn"),
+}
 
 var direction : Vector2
 var state = State.Alive
@@ -124,3 +129,6 @@ func take_damage(dmg:float)->void:
 func _on_animation_finished() -> void:
 	queue_free()
 	
+static func get_instance(id:String) -> Tank:
+	var tank : PackedScene = tank_nodes[id]
+	return tank.instantiate()

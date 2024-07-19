@@ -17,9 +17,6 @@ enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 @onready var screeen_base : Control = $"%BaseScreen"
 @onready var btn_next_wave : Button = $"%NextWave"
 
-
-var tank_node = load("res://tanks/tank.tscn")
-
 var starting_towers : Array = []
 var unlocked_towers : Array = []
 var selected_reward : Reward = null
@@ -31,6 +28,7 @@ var spawned_tanks = 0
 var wave_started = false
 var spanw_tank_timer_max = 1.8
 var spanw_tank_timer = 0
+var tanks_type_per_wave = ["red","red","green","green","blue"]
 
 var current_wave : int:
 	set(v):
@@ -75,7 +73,7 @@ func _ready() -> void:
 	_load_rewards()
 	
 	TopUI.hide_loading_screen()
-	current_state = State.WaveCompleted
+	current_state = State.Playing
 	
 func _on_tower_button_toggled(tb:TowerButton)->void:
 	if tb.button_pressed:
@@ -111,7 +109,7 @@ func _process(delta: float) -> void:
 		spanw_tank_timer -= delta
 		if spanw_tank_timer <=0:
 			spanw_tank_timer = spanw_tank_timer_max
-			var tank = _spawn_tank()
+			var tank = _spawn_tank(tanks_type_per_wave[current_wave])
 			tanks_parent.add_child(tank)
 			spawned_tanks += 1
 	
@@ -135,8 +133,8 @@ func _on_tank_reached_target(tank:Tank)->void:
 func _on_tank_destroyed(tank)->void:
 	money += 50
 
-func _spawn_tank()->Tank:
-	var tank:Tank = tank_node.instantiate()
+func _spawn_tank(type :String = "blue")->Tank:
+	var tank:Tank = Tank.get_instance(type)
 	tank.global_position = level.get_next_marker()
 	tank.arrived.connect(_on_tank_reached_target)
 	tank.dead.connect(_on_tank_destroyed)

@@ -41,9 +41,9 @@ animations = [{
 radius = 200.0
 
 [node name="Tower" type="Area2D" groups=["tower"]]
-position = Vector2(42, 64)
+position = Vector2(42, 63)
 script = ExtResource("1_4sp23")
-damage = 2.0
+damage = 1.0
 cost = 75
 solidity = 6.0
 id = "tower249"
@@ -68,6 +68,7 @@ position = Vector2(0, -115)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CircleShape2D_wsv0n")
 
 [node name="Explosion" type="AnimatedSprite2D" parent="."]
@@ -90,6 +91,7 @@ vertical_alignment = 1
 
 [node name="Range" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource("CircleShape2D_inc78")

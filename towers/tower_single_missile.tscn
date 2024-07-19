@@ -41,10 +41,10 @@ animations = [{
 radius = 200.0
 
 [node name="SingleMissile" type="Area2D" groups=["tower"]]
-position = Vector2(42, 64)
+position = Vector2(42, 42)
 script = ExtResource("1_33wiu")
 cost = 75
-solidity = 6.0
+solidity = 9.0
 id = "tower249"
 projectile_speed = 20.0
 projectile_scene = ExtResource("2_s0il0")

@@ -21,4 +21,4 @@ text = "Single canon"
 
 [node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
 text = "Shoot a canon at opponents
-Damage : 2"
+Damage : 1"

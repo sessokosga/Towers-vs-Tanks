@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://bvbme60lhttgl"]
+
+[ext_resource type="Script" path="res://tanks/tank.gd" id="1_srvxx"]
+[ext_resource type="PackedScene" uid="uid://d4hm16ripiur5" path="res://tanks/projectiles/bullet_red.tscn" id="2_feapd"]
+[ext_resource type="Texture2D" uid="uid://borbqc4phwntj" path="res://tanks/assets/images/explosion/explosion1.png" id="2_h0hdf"]
+[ext_resource type="Texture2D" uid="uid://bj82mqfxj7te4" path="res://tanks/assets/images/explosion/explosion2.png" id="3_wknme"]
+[ext_resource type="Texture2D" uid="uid://ytt5c8ddor3p" path="res://tanks/assets/images/explosion/explosion3.png" id="4_e2pdt"]
+[ext_resource type="Texture2D" uid="uid://p6mni4d1qv22" path="res://tanks/assets/images/explosion/explosion4.png" id="5_f012x"]
+[ext_resource type="Texture2D" uid="uid://tj3w8bg6wwh5" path="res://tanks/assets/images/explosion/explosion5.png" id="6_6ooh8"]
+[ext_resource type="Texture2D" uid="uid://df772x6icf2e3" path="res://tanks/assets/images/tankBody_red.png" id="7_1l5td"]
+[ext_resource type="Texture2D" uid="uid://bvdxhauw0df0b" path="res://tanks/assets/images/tankRed_barrel2.png" id="8_xm0ke"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1mymw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h0hdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wknme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e2pdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f012x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6ooh8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8ft5"]
+size = Vector2(58, 47)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_do6v0"]
+radius = 200.0
+
+[node name="Tank" type="CharacterBody2D" groups=["tank"]]
+position = Vector2(1, 0)
+script = ExtResource("1_srvxx")
+id = "red"
+speed = 100.0
+projectile_scene = ExtResource("2_feapd")
+initial_barrel_rotation = -90.0
+initial_body_rotation = -90.0
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+sprite_frames = SubResource("SpriteFrames_1mymw")
+frame = 4
+frame_progress = 1.0
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+rotation = -1.5708
+texture = ExtResource("7_1l5td")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+rotation = -1.5708
+texture = ExtResource("8_xm0ke")
+offset = Vector2(0, 23)
+
+[node name="Bullet" type="Sprite2D" parent="Barrel"]
+unique_name_in_owner = true
+position = Vector2(0, 63)
+flip_v = true
+
+[node name="LabelSolidity" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -21.0
+offset_top = -13.0
+offset_right = 19.0
+offset_bottom = 15.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, -0.5)
+shape = SubResource("RectangleShape2D_p8ft5")
+
+[node name="Range" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_do6v0")
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_animation_finished"]

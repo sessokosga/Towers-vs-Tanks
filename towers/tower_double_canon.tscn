@@ -43,8 +43,9 @@ radius = 200.0
 [node name="DoubleCanon" type="Area2D" groups=["tower"]]
 position = Vector2(42, 64)
 script = ExtResource("1_b680x")
-damage = 2.0
+damage = 1.0
 type = 1
+solidity = 7.0
 canon_type = 1
 id = "tile250"
 projectile_speed = 20.0

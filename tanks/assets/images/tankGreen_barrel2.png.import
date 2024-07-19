@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df0e2jccgtld0"
-path="res://.godot/imported/bulletBlue2.png-014176656179eaee8fe8774c9d73bded.ctex"
+uid="uid://co3vkggnamuds"
+path="res://.godot/imported/tankGreen_barrel2.png-c9001716183a422ec999bc24e7a17ebf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rewards/assets/images/bulletBlue2.png"
-dest_files=["res://.godot/imported/bulletBlue2.png-014176656179eaee8fe8774c9d73bded.ctex"]
+source_file="res://tanks/assets/images/tankGreen_barrel2.png"
+dest_files=["res://.godot/imported/tankGreen_barrel2.png-c9001716183a422ec999bc24e7a17ebf.ctex"]
 
 [params]
 

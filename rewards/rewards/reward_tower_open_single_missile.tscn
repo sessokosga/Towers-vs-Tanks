@@ -24,4 +24,4 @@ text = "SINGLE MISSILE"
 
 [node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
 text = "Shoot a missile. Make more damage
-Damage : 5"
+Damage : 4"
