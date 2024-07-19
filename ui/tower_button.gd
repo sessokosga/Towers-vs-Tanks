@@ -6,6 +6,7 @@ class_name TowerButton
 
 signal toggled_it(tb)
 signal pressed_me(tb)
+signal hovered(tb)
 
 @export var type : Tower.Type
 @export var id : String = ""
@@ -17,8 +18,8 @@ signal pressed_me(tb)
 		lab_cost.text = str(cost)
 		
 static var tower_nodes : Dictionary = {
-	"tower249" : load("res://ui/tower_button.tscn"),
-	"tower250" : load("res://towers/tower_double_canon.tscn")
+	"tower249" : load("res://towers/towers/tower_single_canon.tscn"),
+	"tower250" : load("res://towers/towers/tower_double_canon.tscn")
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -40,3 +41,7 @@ func _on_pressed() -> void:
 	
 static func get_instance(id:String)->Tower:
 	return tower_nodes[id].instantiate()
+
+
+func _on_mouse_entered() -> void:
+	hovered.emit(self)

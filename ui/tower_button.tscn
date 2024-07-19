@@ -49,5 +49,6 @@ theme_override_font_sizes/font_size = 25
 text = "200"
 vertical_alignment = 1
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="toggled" from="." to="." method="_on_toggled"]

@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvdl1pxmp8fqk"]
+[gd_scene load_steps=13 format=3 uid="uid://wa250i8fjkfi"]
 
-[ext_resource type="Script" path="res://towers/tower.gd" id="1_33wiu"]
-[ext_resource type="PackedScene" uid="uid://bjv6c8dhqhixx" path="res://towers/projectiles/big_missile.tscn" id="2_s0il0"]
-[ext_resource type="Texture2D" uid="uid://c53oovyvym8iw" path="res://towers/assets/images/towerDefense_tile181.png" id="3_tovaa"]
-[ext_resource type="Texture2D" uid="uid://clobsdltco0r1" path="res://ui/assets/images/towerDefense_tile206.png" id="4_qan3n"]
-[ext_resource type="Texture2D" uid="uid://dwjxm03dvxsw0" path="res://towers/assets/images/explosion/explosionSmoke1.png" id="5_m88nv"]
-[ext_resource type="Texture2D" uid="uid://bjpit7kb45wd8" path="res://towers/assets/images/explosion/explosionSmoke2.png" id="6_w8uqk"]
-[ext_resource type="Texture2D" uid="uid://gdhrbhypd8ec" path="res://towers/assets/images/explosion/explosionSmoke3.png" id="7_cuyq8"]
-[ext_resource type="Texture2D" uid="uid://dg5auf5pdrl08" path="res://towers/assets/images/explosion/explosionSmoke4.png" id="8_b33u2"]
-[ext_resource type="Texture2D" uid="uid://bkdlw0kqkvvs8" path="res://towers/assets/images/explosion/explosionSmoke5.png" id="9_cjli8"]
+[ext_resource type="Script" path="res://towers/tower.gd" id="1_4sp23"]
+[ext_resource type="Texture2D" uid="uid://c53oovyvym8iw" path="res://towers/assets/images/towerDefense_tile181.png" id="2_css2w"]
+[ext_resource type="PackedScene" uid="uid://cl4qye8iw6huq" path="res://towers/projectiles/shot_thin.tscn" id="2_t41cw"]
+[ext_resource type="Texture2D" uid="uid://csc0l2hpxv0rw" path="res://towers/assets/images/towerDefense_tile249.png" id="3_5wfrw"]
+[ext_resource type="Texture2D" uid="uid://dwjxm03dvxsw0" path="res://towers/assets/images/explosion/explosionSmoke1.png" id="5_slgje"]
+[ext_resource type="Texture2D" uid="uid://bjpit7kb45wd8" path="res://towers/assets/images/explosion/explosionSmoke2.png" id="6_a5t7g"]
+[ext_resource type="Texture2D" uid="uid://gdhrbhypd8ec" path="res://towers/assets/images/explosion/explosionSmoke3.png" id="7_85q0b"]
+[ext_resource type="Texture2D" uid="uid://dg5auf5pdrl08" path="res://towers/assets/images/explosion/explosionSmoke4.png" id="8_d3mv8"]
+[ext_resource type="Texture2D" uid="uid://bkdlw0kqkvvs8" path="res://towers/assets/images/explosion/explosionSmoke5.png" id="9_fm180"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsv0n"]
 resource_local_to_scene = true
@@ -18,19 +18,19 @@ radius = 35.2278
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_m88nv")
+"texture": ExtResource("5_slgje")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_w8uqk")
+"texture": ExtResource("6_a5t7g")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_cuyq8")
+"texture": ExtResource("7_85q0b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_b33u2")
+"texture": ExtResource("8_d3mv8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_cjli8")
+"texture": ExtResource("9_fm180")
 }],
 "loop": false,
 "name": &"default",
@@ -40,32 +40,32 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_inc78"]
 radius = 200.0
 
-[node name="SingleMissile" type="Area2D" groups=["tower"]]
-position = Vector2(42, 42)
-script = ExtResource("1_33wiu")
+[node name="Tower" type="Area2D" groups=["tower"]]
+position = Vector2(42, 63)
+script = ExtResource("1_4sp23")
+damage = 1.0
 cost = 75
-solidity = 9.0
+solidity = 6.0
 id = "tower249"
 projectile_speed = 20.0
-projectile_scene = ExtResource("2_s0il0")
+projectile_scene = ExtResource("2_t41cw")
+icon = ExtResource("3_5wfrw")
 
 [node name="Base" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -5)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("3_tovaa")
-offset = Vector2(0, 6.25)
+texture = ExtResource("2_css2w")
 
 [node name="Body" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1, 0)
+position = Vector2(1, 1)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("4_qan3n")
-offset = Vector2(-1, 2.5)
+texture = ExtResource("3_5wfrw")
+offset = Vector2(-1, -25)
 
 [node name="Projectile" type="Sprite2D" parent="Body"]
 unique_name_in_owner = true
-position = Vector2(-1.25, -38.75)
+position = Vector2(0, -115)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true

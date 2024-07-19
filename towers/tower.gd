@@ -1,7 +1,7 @@
 class_name Tower extends Area2D
 
 enum CanonType {Mono, Double}
-enum UnlockConditions {None, }
+enum UnlockConditions {None, ReachWave3, WinARun}
 enum Type {Base,DoubleCanon, SingleMissile}
 enum State {Alive,Dead}
 
@@ -21,7 +21,7 @@ signal dead(tower)
 @export var projectile_speed : float = 4
 @export var projectile_scene : PackedScene 
 @export var initial_body_rotation : float = 0
-
+@export var icon : Texture2D
 
 @onready var body : Sprite2D = $"%Body"
 @onready var base : Sprite2D = $"%Base"
@@ -41,9 +41,9 @@ var cell : Vector2i
 var frozen = false
 
 static var tower_nodes : Dictionary = {
-	"tower249" : preload("res://towers/tower_single_canon.tscn"),
-	"tower250" : preload("res://towers/tower_double_canon.tscn"),
-	"tower206" : preload("res://towers/tower_single_missile.tscn"),
+	"tower249" : preload("res://towers/towers/tower_single_canon.tscn"),
+	"tower250" : preload("res://towers/towers/tower_double_canon.tscn"),
+	"tower206" : preload("res://towers/towers/tower_single_missile.tscn"),
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -122,3 +122,14 @@ func take_damage(dmg:float)->void:
 		
 static func get_instance(id:String)->Tower:
 	return tower_nodes[id].instantiate()
+	
+static func get_string_type(tp:Type)->String:
+	var type_str = ""
+	match tp:
+		Type.Base:
+			type_str = "Single Canon"
+		Type.DoubleCanon:
+			type_str = "Double Canon"
+		Type. SingleMissile:
+			type_str = "Single Missile"
+	return type_str

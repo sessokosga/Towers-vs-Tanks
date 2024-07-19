@@ -5,7 +5,7 @@ extends Control
 @export var by_pass : ScreenState
 
 
-enum ScreenState {Home, Credits, Play, Upgrade,Settings}
+enum ScreenState {Home, Credits, Play, Upgrade,Settings, TowerSelection}
 var current_screen:ScreenState :
 	set(new_state):
 		_change_state(new_state)
@@ -19,6 +19,9 @@ func _change_state(new_state : ScreenState)->void:
 		ScreenState.Play:
 			TopUI.show_loading_screen()
 			get_tree().change_scene_to_file("res://ui/game.tscn")
+		ScreenState.TowerSelection:
+			TopUI.show_loading_screen()
+			get_tree().change_scene_to_file("res://ui/tower_selection.tscn")
 		ScreenState.Credits:
 			TopUI.show_loading_screen()
 			get_tree().change_scene_to_file("res://ui/credits.tscn")

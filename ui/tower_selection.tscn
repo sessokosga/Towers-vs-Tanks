@@ -1,0 +1,292 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsrtygllgr40k"]
+
+[ext_resource type="Script" path="res://ui/tower_selection.gd" id="1_1bs7m"]
+[ext_resource type="PackedScene" uid="uid://ditxkthm5x152" path="res://ui/background.tscn" id="1_i0amx"]
+[ext_resource type="Texture2D" uid="uid://bum0u7th6kflh" path="res://ui/assets/images/towerDefense_tile249.png" id="2_2dlrv"]
+[ext_resource type="PackedScene" uid="uid://dtv1fsyvvbca7" path="res://ui/tower_button.tscn" id="2_u0ady"]
+[ext_resource type="Texture2D" uid="uid://errnsxmnhuvi" path="res://ui/assets/images/towerDefense_tile249_hover.png" id="3_a3aam"]
+[ext_resource type="Texture2D" uid="uid://daxom43qkyfy7" path="res://ui/assets/images/lock_closed.png" id="4_vx7r3"]
+[ext_resource type="Texture2D" uid="uid://bved704oh32bh" path="res://towers/assets/images/towerDefense_tile250.png" id="5_dw4xb"]
+[ext_resource type="Texture2D" uid="uid://bpq5juel36ptf" path="res://ui/assets/images/towerDefense_tile250_hover.png" id="6_a1o77"]
+[ext_resource type="Texture2D" uid="uid://clobsdltco0r1" path="res://ui/assets/images/towerDefense_tile206.png" id="7_g02jg"]
+[ext_resource type="Texture2D" uid="uid://dpbphhdnghk86" path="res://ui/assets/images/towerDefense_tile206_hover.png" id="8_etu2r"]
+
+[node name="TowerSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1bs7m")
+
+[node name="Background" parent="." instance=ExtResource("1_i0amx")]
+layout_mode = 1
+
+[node name="Description" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -333.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Description"]
+custom_minimum_size = Vector2(269, 0)
+layout_mode = 2
+
+[node name="Description" type="Control" parent="Description"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="Description/Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.647059)
+
+[node name="MarginContainer" type="MarginContainer" parent="Description/Description"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control2" type="Control" parent="Description/Description/MarginContainer"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="Description/Description/MarginContainer/Control2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="Description/Description/MarginContainer/Control2/Icon"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 91.0
+offset_bottom = 99.0
+texture = ExtResource("2_2dlrv")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ColorRect" type="ColorRect" parent="Description/Description/MarginContainer/Control2/Icon/Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.877616, 0.877616, 0.877616, 0.180392)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Description/Description/MarginContainer/Control2/Icon"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = -4.0
+offset_right = 224.0
+offset_bottom = 67.0
+theme_override_constants/separation = 1
+
+[node name="Title" type="Label" parent="Description/Description/MarginContainer/Control2/Icon/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Voucher"
+
+[node name="Type" type="Label" parent="Description/Description/MarginContainer/Control2/Icon/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Tower"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Description/Description/MarginContainer/Control2"]
+layout_mode = 2
+offset_top = 115.0
+offset_right = 360.0
+offset_bottom = 460.0
+
+[node name="Solidity" type="Label" parent="Description/Description/MarginContainer/Control2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Solidity : 5"
+
+[node name="Damage" type="Label" parent="Description/Description/MarginContainer/Control2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Damage : 1"
+
+[node name="Cooldown" type="Label" parent="Description/Description/MarginContainer/Control2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Cooldown : 0.8s"
+
+[node name="Cost" type="Label" parent="Description/Description/MarginContainer/Control2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Cost : 75"
+
+[node name="CanonType" type="Label" parent="Description/Description/MarginContainer/Control2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Canon type : Single Canon"
+
+[node name="Unlock" type="Control" parent="Description"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="Description/Unlock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.647059)
+
+[node name="MarginContainer" type="MarginContainer" parent="Description/Unlock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Control2" type="Control" parent="Description/Unlock/MarginContainer"]
+layout_mode = 2
+
+[node name="Icon" type="Control" parent="Description/Unlock/MarginContainer/Control2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+size_flags_vertical = 3
+
+[node name="Icon" type="TextureRect" parent="Description/Unlock/MarginContainer/Control2/Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -56.5
+offset_right = 45.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_vx7r3")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="UnlockCondition" type="Label" parent="Description/Unlock/MarginContainer/Control2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -326.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+
+[node name="Towers" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -324.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="Towers"]
+custom_minimum_size = Vector2(269, 0)
+layout_mode = 2
+
+[node name="SingleCanon" parent="Towers" instance=ExtResource("2_u0ady")]
+layout_mode = 2
+texture_hover = ExtResource("3_a3aam")
+texture_disabled = ExtResource("4_vx7r3")
+id = "tower249"
+cost = 75
+
+[node name="Control" parent="Towers/SingleCanon" index="0"]
+visible = false
+
+[node name="Cost" parent="Towers/SingleCanon/Control" index="1"]
+text = "75"
+
+[node name="DoubleCanon" parent="Towers" instance=ExtResource("2_u0ady")]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("5_dw4xb")
+texture_hover = ExtResource("6_a1o77")
+texture_disabled = ExtResource("4_vx7r3")
+type = 1
+id = "tower250"
+cost = 125
+
+[node name="Control" parent="Towers/DoubleCanon" index="0"]
+visible = false
+
+[node name="Cost" parent="Towers/DoubleCanon/Control" index="1"]
+text = "125"
+
+[node name="SingleMissile" parent="Towers" instance=ExtResource("2_u0ady")]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("7_g02jg")
+texture_hover = ExtResource("8_etu2r")
+texture_disabled = ExtResource("4_vx7r3")
+type = 2
+id = "tower206"
+cost = 150
+
+[node name="Control" parent="Towers/SingleMissile" index="0"]
+visible = false
+
+[node name="Cost" parent="Towers/SingleMissile/Control" index="1"]
+text = "150"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 269.0
+offset_right = 509.0
+offset_bottom = 165.0
+theme_override_font_sizes/font_size = 70
+text = "Tower Selection"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="Towers/SingleCanon"]
+[editable path="Towers/DoubleCanon"]
+[editable path="Towers/SingleMissile"]

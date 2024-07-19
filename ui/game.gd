@@ -169,6 +169,8 @@ func _handle_state_changes()->void:
 	screeen_pause.hide()
 	screeen_victory.hide()
 	screeen_wave_completed.hide()
+	var unlocked = PlayerData.retreive_unlocked_towers()
+	print(unlocked)
 	match current_state:
 		State.Playing:
 			_set_peace(false)
@@ -182,6 +184,11 @@ func _handle_state_changes()->void:
 			_set_frozen(true)
 			screeen_base.show()
 			screeen_wave_completed.show()
+			if not unlocked.has("tower250") and current_wave >= 3:
+				print(unlocked)
+				unlocked.append("tower250")
+				print(unlocked)
+				PlayerData.save_unlocked_towers(unlocked)
 		State.GameOver:
 			screeen_base.show()
 			screeen_gameover.show()
@@ -189,6 +196,10 @@ func _handle_state_changes()->void:
 			AudioPlayer.play_ui(AudioPlayer.UI.RewardUnlocked)
 			screeen_base.show()
 			screeen_victory.show()
+			
+			if not unlocked.has("tower249"):
+				unlocked.append("tower249")
+				PlayerData.save_unlocked_towers(unlocked)
 
 func _on_restart_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
@@ -270,7 +281,7 @@ func _add_rewards(num)->void:
 		 
 func _apply_reward()->void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Confirm)
-	selected_reward.hide()
+	
 	match selected_reward.effect:
 		Reward.Effect.AddTwoTowerPlace:
 			level.add_tower_places(2) 
@@ -281,14 +292,17 @@ func _apply_reward()->void:
 		Reward.Effect.AddThousandCoins:
 			money += 1000
 		Reward.Effect.SingleCanon:
+			selected_reward.hide()
 			_check_afordable_towers()
 			_add_tower_type(Tower.Type.Base)
 			selected_reward.removed = true
 		Reward.Effect.DoubleCanon:
+			selected_reward.hide()
 			_check_afordable_towers()
 			_add_tower_type(Tower.Type.DoubleCanon)
 			selected_reward.removed = true
 		Reward.Effect.SingleMissile:
+			selected_reward.hide()
 			_check_afordable_towers()
 			_add_tower_type(Tower.Type.SingleMissile)
 			selected_reward.removed = true

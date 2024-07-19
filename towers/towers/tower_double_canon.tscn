@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://tk7px5jsgem"]
 
-[ext_resource type="Script" path="res://towers/tower.gd" id="1_b680x"]
-[ext_resource type="PackedScene" uid="uid://cl4qye8iw6huq" path="res://towers/projectiles/shot_thin.tscn" id="2_dnwpc"]
-[ext_resource type="Texture2D" uid="uid://c53oovyvym8iw" path="res://towers/assets/images/towerDefense_tile181.png" id="3_pius7"]
-[ext_resource type="Texture2D" uid="uid://bved704oh32bh" path="res://towers/assets/images/towerDefense_tile250.png" id="4_h6p7t"]
-[ext_resource type="Texture2D" uid="uid://dwjxm03dvxsw0" path="res://towers/assets/images/explosion/explosionSmoke1.png" id="5_ul0c6"]
-[ext_resource type="Texture2D" uid="uid://bjpit7kb45wd8" path="res://towers/assets/images/explosion/explosionSmoke2.png" id="6_g1cxh"]
-[ext_resource type="Texture2D" uid="uid://gdhrbhypd8ec" path="res://towers/assets/images/explosion/explosionSmoke3.png" id="7_0b1qn"]
-[ext_resource type="Texture2D" uid="uid://dg5auf5pdrl08" path="res://towers/assets/images/explosion/explosionSmoke4.png" id="8_auk8n"]
-[ext_resource type="Texture2D" uid="uid://bkdlw0kqkvvs8" path="res://towers/assets/images/explosion/explosionSmoke5.png" id="9_elyhd"]
+[ext_resource type="Script" path="res://towers/tower.gd" id="1_0baj5"]
+[ext_resource type="PackedScene" uid="uid://cl4qye8iw6huq" path="res://towers/projectiles/shot_thin.tscn" id="2_edpun"]
+[ext_resource type="Texture2D" uid="uid://c53oovyvym8iw" path="res://towers/assets/images/towerDefense_tile181.png" id="3_61ug1"]
+[ext_resource type="Texture2D" uid="uid://bved704oh32bh" path="res://towers/assets/images/towerDefense_tile250.png" id="4_lans6"]
+[ext_resource type="Texture2D" uid="uid://dwjxm03dvxsw0" path="res://towers/assets/images/explosion/explosionSmoke1.png" id="5_c2fyl"]
+[ext_resource type="Texture2D" uid="uid://bjpit7kb45wd8" path="res://towers/assets/images/explosion/explosionSmoke2.png" id="6_js1jn"]
+[ext_resource type="Texture2D" uid="uid://gdhrbhypd8ec" path="res://towers/assets/images/explosion/explosionSmoke3.png" id="7_incgl"]
+[ext_resource type="Texture2D" uid="uid://dg5auf5pdrl08" path="res://towers/assets/images/explosion/explosionSmoke4.png" id="8_yrk2r"]
+[ext_resource type="Texture2D" uid="uid://bkdlw0kqkvvs8" path="res://towers/assets/images/explosion/explosionSmoke5.png" id="9_i0dee"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wsv0n"]
 resource_local_to_scene = true
@@ -18,19 +18,19 @@ radius = 35.2278
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_ul0c6")
+"texture": ExtResource("5_c2fyl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_g1cxh")
+"texture": ExtResource("6_js1jn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_0b1qn")
+"texture": ExtResource("7_incgl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_auk8n")
+"texture": ExtResource("8_yrk2r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_elyhd")
+"texture": ExtResource("9_i0dee")
 }],
 "loop": false,
 "name": &"default",
@@ -42,25 +42,28 @@ radius = 200.0
 
 [node name="DoubleCanon" type="Area2D" groups=["tower"]]
 position = Vector2(42, 64)
-script = ExtResource("1_b680x")
+script = ExtResource("1_0baj5")
 damage = 1.0
 type = 1
 solidity = 7.0
 canon_type = 1
-id = "tile250"
+unlock_condition = 1
+unlock_description = "Reach Wave 3"
+id = "tower250"
 projectile_speed = 20.0
-projectile_scene = ExtResource("2_dnwpc")
+projectile_scene = ExtResource("2_edpun")
+icon = ExtResource("4_lans6")
 
 [node name="Base" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("3_pius7")
+texture = ExtResource("3_61ug1")
 
 [node name="Body" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(1, 1)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("4_h6p7t")
+texture = ExtResource("4_lans6")
 offset = Vector2(-1, -25)
 
 [node name="Projectile" type="Sprite2D" parent="Body"]
