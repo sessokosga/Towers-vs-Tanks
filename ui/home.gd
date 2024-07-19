@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 
 func _on_play_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
-	current_screen = ScreenState.Play
+	current_screen = ScreenState.TowerSelection
 
 
 func _on_upgrade_pressed() -> void:

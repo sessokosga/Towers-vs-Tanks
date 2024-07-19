@@ -169,8 +169,6 @@ func _handle_state_changes()->void:
 	screeen_pause.hide()
 	screeen_victory.hide()
 	screeen_wave_completed.hide()
-	var unlocked = PlayerData.retreive_unlocked_towers()
-	print(unlocked)
 	match current_state:
 		State.Playing:
 			_set_peace(false)
@@ -184,11 +182,7 @@ func _handle_state_changes()->void:
 			_set_frozen(true)
 			screeen_base.show()
 			screeen_wave_completed.show()
-			if not unlocked.has("tower250") and current_wave >= 3:
-				print(unlocked)
-				unlocked.append("tower250")
-				print(unlocked)
-				PlayerData.save_unlocked_towers(unlocked)
+			_check_tower_unlock_condition()
 		State.GameOver:
 			screeen_base.show()
 			screeen_gameover.show()
@@ -197,9 +191,7 @@ func _handle_state_changes()->void:
 			screeen_base.show()
 			screeen_victory.show()
 			
-			if not unlocked.has("tower249"):
-				unlocked.append("tower249")
-				PlayerData.save_unlocked_towers(unlocked)
+			_check_tower_unlock_condition()
 
 func _on_restart_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
@@ -281,7 +273,6 @@ func _add_rewards(num)->void:
 		 
 func _apply_reward()->void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Confirm)
-	
 	match selected_reward.effect:
 		Reward.Effect.AddTwoTowerPlace:
 			level.add_tower_places(2) 
@@ -336,3 +327,16 @@ func _load_starting_towers()->void:
 			if tb.id == id:
 				tb.show()
 			
+func _check_tower_unlock_condition()->void:
+	var unlocked = PlayerData.retreive_unlocked_towers()
+	print("before : ", unlocked)
+	if not unlocked.has("tower206") and current_state == State.Victory:
+		unlocked.append("tower206")
+		PlayerData.save_unlocked_towers(unlocked)
+			
+	if not unlocked.has("tower250") and current_wave >= 0:
+		print(unlocked)
+		unlocked.append("tower250")
+		print(unlocked)
+		PlayerData.save_unlocked_towers(unlocked)
+	print("after : ", unlocked)
