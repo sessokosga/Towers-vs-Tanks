@@ -2,7 +2,7 @@ extends Control
 class_name Reward
 
 enum Effect {
-	AddTwoTowerPlace, AddTwoHealthPoints, Add500Coins, SingleCanon,DoubleCanon, SingleMissile,
+	AddTwoTowerPlace, AddTwoHealthPoints, Add100Coins, Add200Coins, Add500Coins, SingleCanon,DoubleCanon, SingleMissile,
 	OpenDoubleMissile, ClosedDoubleMissile
 }
 

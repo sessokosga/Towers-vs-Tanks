@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://1m2gcmmgxwfd" path="res://assets/images/objects/towerDefense_tile272_grayscale.png" id="2_lsiko"]
 
 [node name="Reward" instance=ExtResource("1_dfyyh")]
-effect = 2
+effect = 4
 type = 1
 
 [node name="TextureRect" parent="Reward/HBoxContainer" index="1"]
