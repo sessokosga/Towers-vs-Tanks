@@ -25,29 +25,40 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
 offset_left = 269.0
 offset_top = 273.0
-offset_right = 605.0
-offset_bottom = 474.0
+offset_right = 309.0
+offset_bottom = 313.0
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(336, 201)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Volume"
 horizontal_alignment = 1
 
-[node name="Master" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Master" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Master" type="Label" parent="VBoxContainer/Master"]
+[node name="Master" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Master"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Master"
 
-[node name="MasterVolume" type="HSlider" parent="VBoxContainer/Master"]
+[node name="MasterVolume" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/Master"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -56,17 +67,17 @@ size_flags_vertical = 1
 min_value = -60.0
 max_value = 0.0
 
-[node name="SFX" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SFX" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="SFX" type="Label" parent="VBoxContainer/SFX"]
+[node name="SFX" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFX"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "SFX"
 
-[node name="SFXVolume" type="HSlider" parent="VBoxContainer/SFX"]
+[node name="SFXVolume" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/SFX"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -75,17 +86,17 @@ size_flags_vertical = 1
 min_value = -60.0
 max_value = 0.0
 
-[node name="Music" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Music" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Music" type="Label" parent="VBoxContainer/Music"]
+[node name="Music" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Music"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Music"
 
-[node name="MusicVolume" type="HSlider" parent="VBoxContainer/Music"]
+[node name="MusicVolume" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/Music"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -93,6 +104,6 @@ size_flags_vertical = 1
 min_value = -60.0
 max_value = 0.0
 
-[connection signal="value_changed" from="VBoxContainer/Master/MasterVolume" to="." method="_on_master_volume_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/SFX/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/Music/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Master/MasterVolume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/SFX/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/Music/MusicVolume" to="." method="_on_music_volume_value_changed"]

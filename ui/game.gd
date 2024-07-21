@@ -63,7 +63,7 @@ func _ready() -> void:
 	unlocked_towers = PlayerData.retreive_unlocked_towers()
 	starting_towers = PlayerData.retreive_starting_towers()
 	
-	health = 20
+	health = 5
 	money = 250
 	current_wave = 0
 	_start_wave()
@@ -131,7 +131,7 @@ func _on_tank_reached_target(tank:Tank)->void:
 		check_wave_completion()
 		
 func _on_tank_destroyed(tank)->void:
-	money += 50
+	money += 25
 
 func _spawn_tank(type :String = "blue")->Tank:
 	var tank:Tank = Tank.get_instance(type)
@@ -280,8 +280,8 @@ func _apply_reward()->void:
 				#selected_reward.removed = true
 		Reward.Effect.AddTwoHealthPoints:
 			health += 2
-		Reward.Effect.AddThousandCoins:
-			money += 1000
+		Reward.Effect.Add500Coins:
+			money += 500
 		Reward.Effect.SingleCanon:
 			selected_reward.hide()
 			_check_afordable_towers()
@@ -329,7 +329,6 @@ func _load_starting_towers()->void:
 			
 func _check_tower_unlock_condition()->void:
 	var unlocked = PlayerData.retreive_unlocked_towers()
-	print("before : ", unlocked)
 	if not unlocked.has("tower206") and current_state == State.Victory:
 		unlocked.append("tower206")
 		PlayerData.save_unlocked_towers(unlocked)
@@ -339,4 +338,3 @@ func _check_tower_unlock_condition()->void:
 		unlocked.append("tower250")
 		print(unlocked)
 		PlayerData.save_unlocked_towers(unlocked)
-	print("after : ", unlocked)

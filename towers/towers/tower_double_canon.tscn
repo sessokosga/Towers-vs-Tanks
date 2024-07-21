@@ -38,7 +38,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_inc78"]
-radius = 200.0
+radius = 250.0
 
 [node name="DoubleCanon" type="Area2D" groups=["tower"]]
 position = Vector2(42, 64)
@@ -101,7 +101,6 @@ vertical_alignment = 1
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
-visible = false
 shape = SubResource("CircleShape2D_inc78")
 
 [connection signal="animation_finished" from="Explosion" to="." method="_on_sprite_animation_finished"]

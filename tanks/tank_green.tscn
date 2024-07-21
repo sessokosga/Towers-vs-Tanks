@@ -37,7 +37,7 @@ animations = [{
 size = Vector2(58, 47)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do6v0"]
-radius = 200.0
+radius = 250.0
 
 [node name="TankGreen" type="CharacterBody2D" groups=["tank"]]
 position = Vector2(1, 0)

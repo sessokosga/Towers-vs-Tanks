@@ -27,8 +27,9 @@ func _ready() -> void:
 	ctrl_description.hide()
 	ctrl_unlock.hide()
 	_load_towers()
-	
+	TopUI.connect_to_back_button(_on_back_btn_pressed)
 	TopUI.hide_loading_screen()
+	TopUI.show_back_button()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,3 +56,7 @@ func _on_tower_button_pressed(tb:TowerButton)->void:
 	PlayerData.save_starting_towers([tb.id])
 	TopUI.show_loading_screen()
 	get_tree().change_scene_to_file("res://ui/game.tscn")
+
+func _on_back_btn_pressed()->void:
+	TopUI.show_loading_screen()
+	get_tree().change_scene_to_file("res://ui/home.tscn")

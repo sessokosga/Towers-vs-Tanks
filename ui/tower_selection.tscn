@@ -87,6 +87,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="ColorRect" type="ColorRect" parent="Description/Description/MarginContainer/Control2/Icon/Icon"]
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,6 +226,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -324.0
+offset_bottom = -241.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -245,9 +247,19 @@ visible = false
 [node name="Cost" parent="Towers/SingleCanon/Control" index="1"]
 text = "75"
 
+[node name="ColorRect" type="ColorRect" parent="Towers/SingleCanon"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.133333, 0.133333, 0.737255)
+
 [node name="DoubleCanon" parent="Towers" instance=ExtResource("2_u0ady")]
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("5_dw4xb")
 texture_hover = ExtResource("6_a1o77")
 texture_disabled = ExtResource("4_vx7r3")
@@ -263,10 +275,10 @@ text = "125"
 
 [node name="SingleMissile" parent="Towers" instance=ExtResource("2_u0ady")]
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("7_g02jg")
 texture_hover = ExtResource("8_etu2r")
 texture_disabled = ExtResource("4_vx7r3")
+stretch_mode = 0
 type = 2
 id = "tower206"
 cost = 150

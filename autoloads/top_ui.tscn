@@ -26,19 +26,19 @@ color = Color(0.162066, 0.162066, 0.162066, 1)
 
 [node name="Label" type="Label" parent="LoadingScreen"]
 layout_mode = 0
-offset_left = 106.0
-offset_top = 925.0
-offset_right = 292.0
-offset_bottom = 980.0
+offset_left = 269.0
+offset_top = 897.0
+offset_right = 455.0
+offset_bottom = 952.0
 theme_override_font_sizes/font_size = 40
 text = "Loading..."
 
 [node name="BackBtn" type="Button" parent="."]
 unique_name_in_owner = true
-offset_left = 38.0
-offset_top = 35.0
-offset_right = 191.0
-offset_bottom = 89.0
+offset_left = 269.0
+offset_top = 873.0
+offset_right = 422.0
+offset_bottom = 927.0
 theme_override_font_sizes/font_size = 30
 text = "Back"
 

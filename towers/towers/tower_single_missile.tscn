@@ -38,11 +38,12 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_inc78"]
-radius = 200.0
+radius = 250.0
 
 [node name="SingleMissile" type="Area2D" groups=["tower"]]
 position = Vector2(42, 42)
 script = ExtResource("1_33wiu")
+damage = 3.0
 cost = 75
 solidity = 9.0
 unlock_condition = 2

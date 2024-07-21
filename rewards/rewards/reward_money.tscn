@@ -14,4 +14,4 @@ texture = ExtResource("2_lsiko")
 text = "more money"
 
 [node name="Description" parent="Reward/HBoxContainer/VBoxContainer" index="2"]
-text = "Gain 1 000 coins"
+text = "Gain 500 coins"
