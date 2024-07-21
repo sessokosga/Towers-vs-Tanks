@@ -38,12 +38,13 @@ static var tank_nodes : Dictionary = {
 
 var direction : Vector2
 var state = State.Alive
-var shoot_timer = 0.5
+var shoot_timer = 0.8
 var enemy : Tower = null
 var target : Vector2
 var roation_speed:float = 3
 var peace_mode = false
 var frozen = false
+var bonus_speed = 0
 
 func _aim_at_enemy()->Vector2:
 	if is_instance_valid(enemy):
@@ -59,10 +60,10 @@ func _aim_at_enemy()->Vector2:
 func _shoot(direction : Vector2)->void:
 	AudioPlayer.play_sfx(AudioPlayer.SFX.TankShootNormal)
 	var projectile : Projectile = projectile_scene.instantiate()
-	projectile.speed = projectile_speed + 700
+	projectile.speed = projectile_speed + 700 + float(bonus_speed * projectile_speed)
 	projectile.direction = direction
 	projectile.damage = damage
-	add_child(projectile)
+	get_tree().root.add_child(projectile)
 	projectile.global_position = projectile_starting.global_position
 	projectile.global_rotation = projectile_starting.global_rotation
 
@@ -80,9 +81,8 @@ func _physics_process(delta: float) -> void:
 				break
 		
 		var direction = _aim_at_enemy()
-		
 		# Handle shoots
-		shoot_timer -= delta
+		shoot_timer -= delta + float(delta * bonus_speed*.8)
 		if shoot_timer <= 0 and is_instance_valid(enemy) and enemy.state == Tower.State.Alive:
 			shoot_timer = cooldown
 			_shoot(direction)
@@ -98,15 +98,16 @@ func _physics_process(delta: float) -> void:
 		if rect.has_point(target):
 			global_position = target
 			arrived.emit(self)
-	
+			
+		var total_speed = speed + bonus_speed * speed
 		if direction.x:
-			velocity.x = direction.x * speed
+			velocity.x = direction.x * total_speed
 		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
+			velocity.x = move_toward(velocity.x, 0, total_speed)
 		if direction.y:
-			velocity.y = direction.y * speed
+			velocity.y = direction.y * total_speed
 		else:
-			velocity.y = move_toward(velocity.y, 0, speed)
+			velocity.y = move_toward(velocity.y, 0, total_speed)
 		
 		position += velocity * delta
 		
@@ -122,7 +123,7 @@ func explode()->void:
 func take_damage(dmg:float)->void:
 	solidity -= dmg
 	lab_solidity.text = str(solidity)
-	if solidity <= 0:
+	if solidity <= 0 and state != State.Dead:
 		dead.emit(self)
 		explode()
 

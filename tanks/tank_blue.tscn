@@ -46,6 +46,7 @@ id = "blue"
 speed = 100.0
 solidity = 9.0
 damage = 3.0
+cooldown = 1.4
 type = 2
 projectile_scene = ExtResource("2_5ekbf")
 initial_barrel_rotation = -90.0

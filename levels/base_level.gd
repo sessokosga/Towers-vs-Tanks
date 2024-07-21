@@ -10,10 +10,10 @@ class_name Level extends Control
 
 @export var starting_places = 10
 @export var starting_objects = 10
-@export var max_waves = 5
+@export var max_waves = 10
 
 const MAX_TRIALS = 40
-const TANKS_PER_WAVE = [2,4,6,8,10]
+const TANKS_PER_WAVE = [4,6,8,4,6,8,4,6,8,10] #[6,8,10,6,8,10,6,8,10,14]
 
 var used_objects : Array[Vector2i]
 var used_tower_places : Array[Vector2i]

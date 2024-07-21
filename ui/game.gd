@@ -10,6 +10,7 @@ enum State {Playing, Pause, GameOver, WaveCompleted, Victory}
 @onready var lab_health : Label = $"%Health"
 @onready var lab_money : Label = $"%Money"
 @onready var lab_wave : Label = $"%Wave"
+@onready var lab_speed : Label = $"%SpeedText"
 @onready var screeen_gameover : Control = $"%GameOver"
 @onready var screeen_wave_completed : Control = $"%WaveCompleted"
 @onready var screeen_pause : Control = $"%Pause"
@@ -28,7 +29,8 @@ var spawned_tanks = 0
 var wave_started = false
 var spanw_tank_timer_max = 1.8
 var spanw_tank_timer = 0
-var tanks_type_per_wave = ["red","red","green","green","blue"]
+var speed : float = 0
+var tanks_type_per_wave = ["red","red","red","red","green","green","green","blue","blue","blue"]
 
 var current_wave : int:
 	set(v):
@@ -55,11 +57,12 @@ var health :
 var money : 
 	set(v):
 		money = v
-		lab_money.text = str("Money : ", money)
+		lab_money.text = str("Coins : ", money)
 		_check_afordable_towers()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	randomize()
 	unlocked_towers = PlayerData.retreive_unlocked_towers()
 	starting_towers = PlayerData.retreive_starting_towers()
 	
@@ -95,6 +98,7 @@ func _deploy_tower(cell:Vector2i)->void:
 		return
 	var tower : Tower = Tower.get_instance(selected_tower_button.id)
 	tower.cell = cell
+	tower.bonus_speed = speed
 	tower.global_position = (cell * 128) + Vector2i(25,38)
 	towers_parent.add_child(tower)
 	tower.dead.connect(_on_tower_destroyed)
@@ -138,6 +142,7 @@ func _spawn_tank(type :String = "blue")->Tank:
 	tank.global_position = level.get_next_marker()
 	tank.arrived.connect(_on_tank_reached_target)
 	tank.dead.connect(_on_tank_destroyed)
+	tank.bonus_speed = speed
 	tank.target = level.get_next_marker(tank.global_position)
 	check_wave_completion()
 	return tank
@@ -180,6 +185,7 @@ func _handle_state_changes()->void:
 		State.WaveCompleted:
 			AudioPlayer.play_ui(AudioPlayer.UI.Confirm)
 			_set_frozen(true)
+			_add_rewards(3)
 			screeen_base.show()
 			screeen_wave_completed.show()
 			_check_tower_unlock_condition()
@@ -191,8 +197,6 @@ func _handle_state_changes()->void:
 			screeen_base.show()
 			screeen_victory.show()
 			
-			_check_tower_unlock_condition()
-
 func _on_restart_pressed() -> void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Select)
 	get_tree().reload_current_scene()
@@ -221,8 +225,10 @@ func check_wave_completion()->void:
 	if spawned_tanks >= level.TANKS_PER_WAVE[current_wave] \
 		and tanks_parent.get_child_count() <= 0:
 			if current_wave < level.max_waves -1:
-				
-				current_state = State.WaveCompleted
+				if health <= 0:
+					current_state = State.GameOver
+				else:
+					current_state = State.WaveCompleted
 			else:
 				if health > 0:
 					current_state = State.Victory
@@ -253,23 +259,38 @@ func _load_rewards()->void:
 	var dir_path = "res://rewards/rewards"
 	var files = DirAccess.open(dir_path)
 	for file in files.get_files():
-		var reward_node :PackedScene = load(str(dir_path,'/',file))
-		
-		var reward : Reward = reward_node.instantiate()
-		if reward.type == Reward.Type.Tower:
-			if unlocked_towers.has(reward.id) and not starting_towers.has(reward.id):
+		if ".tscn.remap" in file:
+			file = file.trim_suffix(".remap")
+		var path = str(dir_path, '/',file)
+		var reward_node :PackedScene = load(path)
+		if is_instance_valid(reward_node):
+			var reward : Reward = reward_node.instantiate()
+			if reward.type == Reward.Type.Tower:
+				if unlocked_towers.has(reward.id) and not starting_towers.has(reward.id):
+					reward.active.connect(_on_reward_active)
+					rewards_parent.add_child(reward)
+			else:
 				reward.active.connect(_on_reward_active)
 				rewards_parent.add_child(reward)
-		else:
-			reward.active.connect(_on_reward_active)
-			rewards_parent.add_child(reward)
+			reward.hide()
 	
 func _add_rewards(num)->void:
 	var trials = 0
 	const MAX_TRIALS = 40
 	var found = 0
+	selected_reward = null
+	rewards_parent.get_children().any(
+		func (rw): 
+			rw.hide()
+			rw.selected = false
+	)
 	while  found < num and trials < MAX_TRIALS:
-		var reward
+		var reward : Reward = rewards_parent.get_children().pick_random()
+		if reward.visible == false and not reward.removed:
+			reward.show()
+			found += 1
+		else:
+			trials += 1
 		 
 func _apply_reward()->void:
 	AudioPlayer.play_ui(AudioPlayer.UI.Confirm)
@@ -280,22 +301,30 @@ func _apply_reward()->void:
 				#selected_reward.removed = true
 		Reward.Effect.AddTwoHealthPoints:
 			health += 2
+			selected_reward.removed = true
+		Reward.Effect.Add100Coins:
+			money += 100
+			selected_reward.removed = true
+		Reward.Effect.Add200Coins:
+			money += 200
+			selected_reward.removed = true
 		Reward.Effect.Add500Coins:
 			money += 500
+			selected_reward.removed = true
 		Reward.Effect.SingleCanon:
 			selected_reward.hide()
 			_check_afordable_towers()
-			_add_tower_type(Tower.Type.Base)
+			_add_tower_type(selected_reward.id)
 			selected_reward.removed = true
 		Reward.Effect.DoubleCanon:
 			selected_reward.hide()
 			_check_afordable_towers()
-			_add_tower_type(Tower.Type.DoubleCanon)
+			_add_tower_type(selected_reward.id)
 			selected_reward.removed = true
 		Reward.Effect.SingleMissile:
 			selected_reward.hide()
 			_check_afordable_towers()
-			_add_tower_type(Tower.Type.SingleMissile)
+			_add_tower_type(selected_reward.id)
 			selected_reward.removed = true
 		#Reward.Effect.OpenSingleMissile:
 			#tb_open_single_missile.disabled = false
@@ -313,10 +342,10 @@ func _apply_reward()->void:
 			#check_tower_purchase_availabity()
 			#selected_reward.removed = true
 
-func _add_tower_type(type:Tower.Type)->void:
+func _add_tower_type(id:String)->void:
 	tower_buttons.get_children().any(
 		func (tb:TowerButton):
-			if tb.type == type:
+			if tb.id == id:
 				tb.show()
 	)
 
@@ -329,12 +358,37 @@ func _load_starting_towers()->void:
 			
 func _check_tower_unlock_condition()->void:
 	var unlocked = PlayerData.retreive_unlocked_towers()
-	if not unlocked.has("tower206") and current_state == State.Victory:
-		unlocked.append("tower206")
-		PlayerData.save_unlocked_towers(unlocked)
-			
-	if not unlocked.has("tower250") and current_wave >= 0:
-		print(unlocked)
-		unlocked.append("tower250")
-		print(unlocked)
-		PlayerData.save_unlocked_towers(unlocked)
+	for id in Tower.tower_nodes:
+		var tower : Tower = Tower.get_instance(id)
+		if not unlocked.has(tower.id):
+			match tower.unlock_condition:
+				Tower.UnlockConditions.ReachWave4:
+					if current_wave == 2:
+						unlocked.append(tower.id)
+						PlayerData.save_unlocked_towers(unlocked)
+				Tower.UnlockConditions.ReachWave7:
+					if current_wave == 5:
+						unlocked.append(tower.id)
+						PlayerData.save_unlocked_towers(unlocked)
+		tower.queue_free()
+
+func _on_speed_up_pressed() -> void:
+	if speed == 0:
+		speed = 0.5
+	elif speed == 0.5:
+		speed = 1
+	elif speed == 1:
+		speed = 2
+	else:
+		speed = 0
+	
+	tanks_parent.get_children().any(
+		func(tank:Tank):
+			tank.bonus_speed = speed
+	)
+	towers_parent.get_children().any(
+		func(tank:Tower):
+			tank.bonus_speed = speed
+	)
+	lab_speed.text = str("Speed : ", 1+speed, "x")
+	

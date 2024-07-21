@@ -46,6 +46,7 @@ id = "green"
 speed = 110.0
 solidity = 7.0
 damage = 2.0
+cooldown = 1.2
 projectile_scene = ExtResource("2_vdtb4")
 initial_barrel_rotation = -90.0
 initial_body_rotation = -90.0

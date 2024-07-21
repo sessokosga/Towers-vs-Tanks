@@ -9,6 +9,7 @@ extends Control
 @onready var canon_type : Label = $"%CanonType"
 @onready var cooldown : Label = $"%Cooldown"
 @onready var solidity : Label = $"%Solidity"
+@onready var damage : Label = $"%Damage"
 @onready var unlock_condition : Label = $"%UnlockCondition"
 
 
@@ -51,6 +52,7 @@ func _on_tower_button_hovered(tb : TowerButton)->void:
 		canon_type.text = str("Canon type : ",Tower.get_string_type(tower.type))
 		cooldown.text = str("Cooldown : ", tower.cooldown, "s")
 		solidity.text = str("Solidity : ", tower.solidity)
+		damage.text = (str("Damage : ",tower.damage))
 	
 func _on_tower_button_pressed(tb:TowerButton)->void:
 	PlayerData.save_starting_towers([tb.id])

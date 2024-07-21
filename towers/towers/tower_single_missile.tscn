@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvdl1pxmp8fqk"]
+[gd_scene load_steps=15 format=3 uid="uid://cvdl1pxmp8fqk"]
 
 [ext_resource type="Script" path="res://towers/tower.gd" id="1_33wiu"]
 [ext_resource type="PackedScene" uid="uid://bjv6c8dhqhixx" path="res://towers/projectiles/big_missile.tscn" id="2_s0il0"]
 [ext_resource type="Texture2D" uid="uid://c53oovyvym8iw" path="res://towers/assets/images/towerDefense_tile181.png" id="3_tovaa"]
 [ext_resource type="Texture2D" uid="uid://clobsdltco0r1" path="res://ui/assets/images/towerDefense_tile206.png" id="4_qan3n"]
+[ext_resource type="Texture2D" uid="uid://cyfg1ek4tpygx" path="res://tanks/assets/images/towerDefense_tile229.png" id="5_6nq8h"]
 [ext_resource type="Texture2D" uid="uid://dwjxm03dvxsw0" path="res://towers/assets/images/explosion/explosionSmoke1.png" id="5_m88nv"]
+[ext_resource type="Texture2D" uid="uid://vmx8wuuekpfp" path="res://towers/assets/images/towerDefense_tile252.png" id="6_uk6yq"]
 [ext_resource type="Texture2D" uid="uid://bjpit7kb45wd8" path="res://towers/assets/images/explosion/explosionSmoke2.png" id="6_w8uqk"]
 [ext_resource type="Texture2D" uid="uid://gdhrbhypd8ec" path="res://towers/assets/images/explosion/explosionSmoke3.png" id="7_cuyq8"]
 [ext_resource type="Texture2D" uid="uid://dg5auf5pdrl08" path="res://towers/assets/images/explosion/explosionSmoke4.png" id="8_b33u2"]
@@ -43,11 +45,13 @@ radius = 250.0
 [node name="SingleMissile" type="Area2D" groups=["tower"]]
 position = Vector2(42, 42)
 script = ExtResource("1_33wiu")
-damage = 3.0
-cost = 75
-solidity = 9.0
+type = 2
+cost = 150
+solidity = 11.0
+cooldown = 1.2
 unlock_condition = 2
-unlock_description = "Win a run"
+unlock_description = "Reach wave 7"
+description = "Reach wave 8"
 id = "tower206"
 projectile_speed = 20.0
 projectile_scene = ExtResource("2_s0il0")
@@ -64,12 +68,14 @@ offset = Vector2(0, 6.25)
 unique_name_in_owner = true
 position = Vector2(1, 0)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("4_qan3n")
+texture = ExtResource("5_6nq8h")
 offset = Vector2(-1, 2.5)
 
 [node name="Projectile" type="Sprite2D" parent="Body"]
 unique_name_in_owner = true
-position = Vector2(-1.25, -38.75)
+position = Vector2(-1.25, -17.5)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("6_uk6yq")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true

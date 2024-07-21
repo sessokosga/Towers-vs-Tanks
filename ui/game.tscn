@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1y7606u08gmw"]
+[gd_scene load_steps=14 format=3 uid="uid://b1y7606u08gmw"]
 
 [ext_resource type="Script" path="res://ui/game.gd" id="1_wlqq4"]
 [ext_resource type="PackedScene" uid="uid://dtv1fsyvvbca7" path="res://ui/tower_button.tscn" id="3_6qfyv"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://clobsdltco0r1" path="res://ui/assets/images/towerDefense_tile206.png" id="9_iawdu"]
 [ext_resource type="Texture2D" uid="uid://dpbphhdnghk86" path="res://ui/assets/images/towerDefense_tile206_hover.png" id="10_wpnpk"]
 [ext_resource type="Texture2D" uid="uid://bxng0p8fuyuwd" path="res://assets/images/towers/towerDefense_tile206_grayscale.png" id="11_0d3xe"]
+[ext_resource type="Texture2D" uid="uid://dka88k35q0j5r" path="res://assets/images/objects/fastForward.png" id="13_axmnl"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -108,13 +109,13 @@ offset_top = 43.0
 offset_right = 757.0
 offset_bottom = 98.0
 theme_override_font_sizes/font_size = 30
-text = "Money : 400"
+text = "Coins : 400"
 
 [node name="Wave" type="Label" parent="Gameplay/HUD"]
 unique_name_in_owner = true
-offset_left = 1443.0
+offset_left = 1653.0
 offset_top = 43.0
-offset_right = 1649.0
+offset_right = 1859.0
 offset_bottom = 98.0
 theme_override_font_sizes/font_size = 30
 text = "Wave : 1"
@@ -421,6 +422,26 @@ texture_normal = ExtResource("6_1vs0m")
 ignore_texture_size = true
 stretch_mode = 5
 
+[node name="Forward" type="HBoxContainer" parent="Gameplay/HUD"]
+offset_left = 1285.0
+offset_top = 31.0
+offset_right = 1514.0
+offset_bottom = 93.0
+
+[node name="SpeedText" type="Label" parent="Gameplay/HUD/Forward"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(175, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Speed : 1x"
+
+[node name="SpeedUp" type="TextureButton" parent="Gameplay/HUD/Forward"]
+custom_minimum_size = Vector2(79, 62)
+layout_mode = 2
+texture_normal = ExtResource("13_axmnl")
+ignore_texture_size = true
+stretch_mode = 5
+
 [connection signal="child_order_changed" from="Gameplay/TanksParent" to="." method="_on_tanks_parent_child_order_changed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/GameOver/HBoxContainer/Home" to="." method="_on_home_pressed"]
@@ -431,3 +452,4 @@ stretch_mode = 5
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/Victory/HBoxContainer/Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/BaseScreen/WaveCompleted/HBoxContainer/NextWave" to="." method="_on_next_wave_pressed"]
 [connection signal="pressed" from="Gameplay/HUD/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Gameplay/HUD/Forward/SpeedUp" to="." method="_on_speed_up_pressed"]
