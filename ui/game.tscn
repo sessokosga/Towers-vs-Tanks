@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://ui/game.gd" id="1_wlqq4"]
 [ext_resource type="PackedScene" uid="uid://dtv1fsyvvbca7" path="res://ui/tower_button.tscn" id="3_6qfyv"]
 [ext_resource type="Texture2D" uid="uid://errnsxmnhuvi" path="res://ui/assets/images/towerDefense_tile249_hover.png" id="4_icn8f"]
-[ext_resource type="Texture2D" uid="uid://b3uplsa2k3apd" path="res://ui/assets/images/towerDefense_tile249_grayscale.png" id="4_r4ulb"]
 [ext_resource type="PackedScene" uid="uid://h05xap187a4v" path="res://levels/base_level.tscn" id="4_sffyr"]
+[ext_resource type="Texture2D" uid="uid://n4hl4iddvd7p" path="res://towers/assets/images/towerDefense_tile249_grayscale.png" id="5_tap78"]
 [ext_resource type="Texture2D" uid="uid://d3acn4h5yo831" path="res://ui/assets/images/pause.png" id="6_1vs0m"]
 [ext_resource type="Texture2D" uid="uid://bved704oh32bh" path="res://towers/assets/images/towerDefense_tile250.png" id="6_womot"]
 [ext_resource type="Texture2D" uid="uid://cuny21yco4nok" path="res://assets/images/towers/towerDefense_tile250_grayscale.png" id="7_3qaqi"]
@@ -69,7 +69,7 @@ grow_horizontal = 2
 [node name="SingleCanon" parent="Gameplay/HUD/TowerButtons" instance=ExtResource("3_6qfyv")]
 layout_mode = 2
 texture_hover = ExtResource("4_icn8f")
-texture_disabled = ExtResource("4_r4ulb")
+texture_disabled = ExtResource("5_tap78")
 id = "tower249"
 cost = 75
 
