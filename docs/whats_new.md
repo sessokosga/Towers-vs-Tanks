@@ -1,14 +1,8 @@
 ##  New Features 
-### Tower 
--  added tower unlocking condition 
--  added two more towers types 
--  added tower unlocking mechanics 
-### Ui 
--  added a tower selection screen 
-### Tank 
--  added tower more tank types 
+-  added the ability to speed up the game
+### Reward 
+-  added one more reward 
+-  added two more rewards 
+##  Updates 
 ### 
--  added rewards logic 
-##   
-### 
--  balanced the game 
+-  added more balance to the game 
