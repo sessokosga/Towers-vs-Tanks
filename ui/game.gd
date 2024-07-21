@@ -308,6 +308,9 @@ func _apply_reward()->void:
 		Reward.Effect.Add200Coins:
 			money += 200
 			selected_reward.removed = true
+		Reward.Effect.Add300Coins:
+			money += 300
+			selected_reward.removed = true
 		Reward.Effect.Add500Coins:
 			money += 500
 			selected_reward.removed = true

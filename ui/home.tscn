@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm47frugkr00w"]
+[gd_scene load_steps=4 format=3 uid="uid://cm47frugkr00w"]
 
 [ext_resource type="Script" path="res://ui/home.gd" id="1_wptgs"]
 [ext_resource type="Texture2D" uid="uid://c65e4mjr075ue" path="res://assets/71-unintended-consequences.png" id="2_ux171"]
 [ext_resource type="PackedScene" uid="uid://ditxkthm5x152" path="res://ui/background.tscn" id="2_xkcbt"]
-[ext_resource type="Texture2D" uid="uid://5e5ot74hk7lb" path="res://assets/71-All-Cards.png" id="3_8ltp5"]
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -92,17 +91,6 @@ offset_top = 935.0
 offset_right = 700.0
 offset_bottom = 1051.0
 texture = ExtResource("2_ux171")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Wildcards" type="TextureRect" parent="Home"]
-visible = false
-layout_mode = 0
-offset_left = 1447.0
-offset_top = 864.0
-offset_right = 1896.0
-offset_bottom = 1064.0
-texture = ExtResource("3_8ltp5")
 expand_mode = 3
 stretch_mode = 5
 

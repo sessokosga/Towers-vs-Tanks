@@ -3,7 +3,7 @@ class_name Reward
 
 enum Effect {
 	AddTwoTowerPlace, AddTwoHealthPoints, Add100Coins, Add200Coins, Add500Coins, SingleCanon,DoubleCanon, SingleMissile,
-	OpenDoubleMissile, ClosedDoubleMissile
+	OpenDoubleMissile, ClosedDoubleMissile, Add300Coins
 }
 
 enum Type {Tower, Money, Place, Health, Damage, Cooldown}
